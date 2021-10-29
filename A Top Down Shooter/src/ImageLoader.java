@@ -51,8 +51,8 @@ public class ImageLoader {
 		BufferedImage level_test = null;
 		BufferedImage mapColorKey = null;
 
-		mapColorKey = readImage("/map_key.png");
-		level_test = readImage("/level_test.png");
+		mapColorKey = readImage("/images/map_key.png");
+		level_test = readImage("/images/level_test.png");
 
 		int h = level_test.getHeight();
 		int w = level_test.getWidth();
