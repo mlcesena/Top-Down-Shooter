@@ -9,4 +9,5 @@ public enum ID {
 
 	Player(), Wall(), Floor(), Bullet(), Enemy();
 	// test change
+	// test change 2
 }
