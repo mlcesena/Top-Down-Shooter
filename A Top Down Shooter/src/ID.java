@@ -8,8 +8,5 @@
 public enum ID {
 
 	Player(), Wall(), Floor(), Bullet(), Enemy();
-	// test change
-	// test change 2
-	// Tyler's change
-	// Matthew's change aprt 2
+
 }
