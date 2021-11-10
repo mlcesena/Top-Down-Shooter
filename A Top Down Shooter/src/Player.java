@@ -95,7 +95,37 @@ public class Player extends Asset {
 					}
 
 				}
+			//Collision with speed powerup
+			} else if (tempAsset.getID() == ID.Power) {
+				if (hitBox().intersects(tempAsset.hitBox())) {
+
+					if (dX > 0) {
+						dX = 12;
+					} else if (dX < 0) {
+						dX = -12;
+					}
+
+				}
+				if (hitBox2().intersects(tempAsset.hitBox())) {
+
+					if (dY > 0) {
+						dY = 12;
+					} else if (dY < 0) {
+						dY = -12;
+					}
+
+				}
 			}
+
+
+
+
+
+
+
+
+
+
 		}
 	}
 

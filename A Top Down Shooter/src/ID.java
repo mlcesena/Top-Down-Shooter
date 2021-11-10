@@ -7,7 +7,7 @@
  */
 public enum ID {
 
-	Player(), Wall(), Floor(), Bullet(), Enemy();
+	Player(), Wall(), Floor(), Bullet(), Enemy(), Power();
 	// test change
 	// test change 2
 	// Tyler's change
