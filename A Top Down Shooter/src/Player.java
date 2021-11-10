@@ -1,10 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 /**
- * Player class is the class created to add the player into the game. The pixel with
- * the corresponding player color will be turned into a 32x48 movable character.
+ * Player class is the class created to add the player into the game. The pixel
+ * with the corresponding player color will be turned into a 32x48 movable
+ * character.
  * 
  * @author Tyler Battershell
  */
@@ -59,21 +61,86 @@ public class Player extends Asset {
 			dY *= 2;
 		}
 
+		Collision();
+
+	}
+
+	/**
+	 * Collision system in the game. If an object's hitBox touches a Wall's hitBox,
+	 * it will not allow it to move any further in that direction
+	 */
+	private void Collision() {
+		for (int i = 0; i < assetController.asset.size(); i++) {
+			Asset tempAsset = assetController.asset.get(i);
+			if (tempAsset.getID() == ID.Wall) {
+				if (hitBox().intersects(tempAsset.hitBox())) {
+
+					if (dX > 0) {
+						dX = 0;
+						x = tempAsset.getX() - 32;
+					} else if (dX < 0) {
+						dX = 0;
+						x = tempAsset.getX() + 32;
+					}
+
+				}
+				if (hitBox2().intersects(tempAsset.hitBox())) {
+
+					if (dY > 0) {
+						dY = 0;
+						y = tempAsset.getY() - 32;
+					} else if (dY < 0) {
+						dY = 0;
+						y = tempAsset.getY() + 32;
+					}
+
+				}
+			}
+		}
 	}
 
 	/**
 	 * render method to render the player into the game.
 	 */
 	public void render(Graphics g) {
+
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setColor(Color.red);
+		g2d.fill(hitBox());
+
+		g2d.setColor(Color.blue);
+		g2d.fill(hitBox2());
+
 		g.setColor(Color.cyan);
 		g.fillRect(x, y, 32, 48);
 	}
 
 	/**
-	 * hitBox method to return a rectangle with the player's hit box
+	 * hitBox method to return a rectangle with the player's hit box, used for
+	 * horizontal collision
 	 */
 	public Rectangle hitBox() {
-		return new Rectangle(x, y, 32, 48);
+
+		double boxX = x + dX;
+		double boxY = y;
+		double boxW = 32 + dX / 2;
+		double boxH = 48;
+
+		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
+	}
+
+	/**
+	 * hitBox method to return a rectangle with the player's hit box, used for
+	 * vertical collision
+	 */
+	public Rectangle hitBox2() {
+
+		double boxX = x;
+		double boxY = y + dY;
+		double boxW = 32;
+		double boxH = 48 + dY / 2;
+
+		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
 	}
 
 }

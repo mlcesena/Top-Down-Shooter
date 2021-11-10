@@ -1,6 +1,7 @@
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 //FIXME
@@ -13,6 +14,7 @@ public class Game extends Canvas implements Runnable {
 	private boolean gameRunning = false;
 	private Thread thread;
 	private AssetController assetController;
+	private Camera camera;
 
 	/**
 	 * Default Game constructor. When this is called, a new window is created, the
@@ -24,6 +26,7 @@ public class Game extends Canvas implements Runnable {
 		start();
 
 		assetController = new AssetController();
+		camera = new Camera(0, 0);
 		this.addKeyListener(new KeyInput(assetController));
 
 		ImageLoader imageLoader = new ImageLoader(assetController);
@@ -97,8 +100,15 @@ public class Game extends Canvas implements Runnable {
 
 	/**
 	 * update method updates every object in the game using the assetController
+	 * Also updates the camera position if there is a player asset
 	 */
 	public void update() {
+
+		for(int i = 0; i < assetController.asset.size(); i++) {
+			if(assetController.asset.get(i).getID() == ID.Player)
+				camera.update(assetController.asset.get(i));
+		}
+
 		assetController.update();
 	}
 
@@ -106,7 +116,8 @@ public class Game extends Canvas implements Runnable {
 	 * render method renders every object in the game using a Buffer Strategy to
 	 * help in the process. The BufferStrategy(3) means it will load the next two
 	 * frames while it is still on the current one. Disposes of prior used graphics
-	 * and makes the next frame available
+	 * and makes the next frame available. Makes use of Graphics2D to translate the
+	 * assets for camera to work properly.
 	 */
 	public void render() {
 		BufferStrategy buffer = this.getBufferStrategy();
@@ -116,6 +127,7 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		Graphics g = buffer.getDrawGraphics();
+		Graphics2D g2d = (Graphics2D) g;
 		/* ========================================== */
 		/* \/ DRAW HERE \/ */
 		/* ========================================== */
@@ -123,7 +135,11 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.ORANGE);
 		g.fillRect(0, 0, 1900, 1000);
 
+		g2d.translate(-camera.getX(), -camera.getY());
+
 		assetController.render(g);
+
+		g2d.translate(camera.getX(), camera.getY());
 
 		/* ========================================== */
 		/* ^ DRAW HERE ^ */
