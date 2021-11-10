@@ -88,7 +88,7 @@ public class Player extends Asset {
 
 					if (dY > 0) {
 						dY = 0;
-						y = tempAsset.getY() - 48;
+						y = tempAsset.getY() - 32;
 					} else if (dY < 0) {
 						dY = 0;
 						y = tempAsset.getY() + 32;
@@ -134,10 +134,10 @@ public class Player extends Asset {
 	 */
 	public void render(Graphics g) {
 
-		// This just shows the hitbox, will remove later
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Color.red);
 		g2d.fill(hitBox());
+
 		g2d.setColor(Color.blue);
 		g2d.fill(hitBox2());
 
@@ -153,7 +153,7 @@ public class Player extends Asset {
 
 		double boxX = x + dX;
 		double boxY = y;
-		double boxW = 32 + dX / 3;
+		double boxW = 32 + dX / 2;
 		double boxH = 48;
 
 		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
@@ -168,7 +168,7 @@ public class Player extends Asset {
 		double boxX = x;
 		double boxY = y + dY;
 		double boxW = 32;
-		double boxH = 48 + dY / 3;
+		double boxH = 48 + dY / 2;
 
 		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
 	}

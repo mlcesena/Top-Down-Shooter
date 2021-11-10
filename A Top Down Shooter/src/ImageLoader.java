@@ -58,9 +58,9 @@ public class ImageLoader {
 		int w = level_test.getWidth();
 		int wallPixel = getRGB(0, 0, mapColorKey);
 		int playerPixel = getRGB(1, 0, mapColorKey);
-		//int enemyPixel = getRGB(2, 0, mapColorKey);
+		int enemyPixel = getRGB(2, 0, mapColorKey);
 		int powerPixel = getRGB(3, 0, mapColorKey);
-
+		
 		for (int imageX = 0; imageX < w; imageX++) {
 			for (int imageY = 0; imageY < h; imageY++) {
 				int pixel = getRGB(imageX, imageY, level_test);
@@ -69,10 +69,11 @@ public class ImageLoader {
 					assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall));
 				else if (pixel == playerPixel)
 					assetController.addAsset(new Player(imageX * 32, imageY * 32, ID.Player, assetController));
-				//else if (pixel == enemyPixel)
-					//assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
+				else if (pixel == enemyPixel)
+					assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
 				else if (pixel == powerPixel)
 					assetController.addAsset(new Power(imageX * 32, imageY * 32, ID.Power));
+				
 			}
 		}
 	}
