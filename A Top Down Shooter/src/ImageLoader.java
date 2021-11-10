@@ -69,8 +69,8 @@ public class ImageLoader {
 					assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall));
 				else if (pixel == playerPixel)
 					assetController.addAsset(new Player(imageX * 32, imageY * 32, ID.Player, assetController));
-				else if (pixel == enemyPixel)
-					assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
+			//	else if (pixel == enemyPixel)
+			//		assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
 				else if (pixel == powerPixel)
 					assetController.addAsset(new Power(imageX * 32, imageY * 32, ID.Power));
 				
