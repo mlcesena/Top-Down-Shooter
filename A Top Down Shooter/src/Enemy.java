@@ -23,16 +23,16 @@ public class Enemy extends Asset {
     }
 
     public void update() {
-        x += dX;
-        y += dY;
+        // x += dX;
+        // y += dY;
 
-        for(int i = 0; i < assetController.asset.size(); i++) {
-			if(assetController.asset.get(i).getID() == ID.Player) {
-                diffX = x - assetController.asset.get(i).getX(); // calculates the difference between the enemy's x and the player's x
-                diffY = y - assetController.asset.get(i).getY(); // calculates the difference between the enemy's y and the player's y
-                distance = Math.sqrt((x - assetController.asset.get(i).getX()) * (x - assetController.asset.get(i).getX()) + (y - assetController.asset.get(i).getY()) * (y - assetController.asset.get(i).getY())); // calculates the total distance between the enemy and player
-            }
-        }
+        // for(int i = 0; i < assetController.asset.size(); i++) {
+		// 	if(assetController.asset.get(i).getID() == ID.Player) {
+        //         diffX = x - assetController.asset.get(i).getX(); // calculates the difference between the enemy's x and the player's x
+        //         diffY = y - assetController.asset.get(i).getY(); // calculates the difference between the enemy's y and the player's y
+        //         distance = Math.sqrt((x - assetController.asset.get(i).getX()) * (x - assetController.asset.get(i).getX()) + (y - assetController.asset.get(i).getY()) * (y - assetController.asset.get(i).getY())); // calculates the total distance between the enemy and player
+        //     }
+        // }
         // if (diffX < x) {
         //     dX = 1;
         // }
@@ -46,8 +46,8 @@ public class Enemy extends Asset {
         // else if (diffY > y){
         //     dY = -1;
         // }
-        dX = ((-1 / distance) * diffX); // sets enemy x velocity
-        dY = ((-1 / distance) * diffY); // sets enemy y velocity
+        // dX = ((-1 / distance) * diffX); // sets enemy x velocity
+        // dY = ((-1 / distance) * diffY); // sets enemy y velocity
     }
 
     public void render(Graphics g) {

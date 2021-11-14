@@ -15,6 +15,8 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private AssetController assetController;
 	private Camera camera;
+	
+	
 
 	/**
 	 * Default Game constructor. When this is called, a new window is created, the
@@ -147,7 +149,14 @@ public class Game extends Canvas implements Runnable {
 
 		g.dispose();
 		buffer.show();
+	}
 
+	public static void setScore() {
+		Window.playerScore++;
+	}
+
+	public static void setLevel() {
+		Window.level++;
 	}
 
 	/**
