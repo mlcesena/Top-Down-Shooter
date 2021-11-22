@@ -11,7 +11,7 @@ import java.util.LinkedList;
  */
 public class AssetController {
 
-	static LinkedList<Asset> asset = new LinkedList<Asset>();
+	public LinkedList<Asset> asset = new LinkedList<Asset>();
 	private boolean up = false, down = false, left = false, right = false, sprint = false;
 
 	/**
