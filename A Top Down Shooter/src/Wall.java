@@ -1,11 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.File;
 import java.io.IOException;
-import java.awt.image.ImageObserver;
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 /**
  * Wall class is the class created to add walls into the game. Each pixel with
@@ -15,10 +13,8 @@ import javax.imageio.ImageIO;
  */
 public class Wall extends Asset {
 	//Initializing wall and updater
-	private ImageObserver observer;
-	private static Image image;
-	private int count1 = 0;
-	private int count2 = 0;
+	private BufferedImage image;
+	private int count = 0;
 	
 
 	/**
@@ -31,14 +27,13 @@ public class Wall extends Asset {
 	public Wall(int x, int y, ID id) {
 		super(x, y, id);
 		
-		observer = null;
-		if(count1 == 0) {
+		if(count == 0) {
 			try {
-				image = ImageIO.read(new File("A Top Down Shooter/src/Test_Wall_Sprite.png"));
+				image = ImageIO.read(getClass().getResource("/images/Test_Wall_Sprite.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			count1 = 1;
+			count = 1;
 		}
 
 	}
@@ -53,7 +48,7 @@ public class Wall extends Asset {
 	 * render method to render the walls into the game.
 	 */
 	public void render(Graphics g) {
-		g.drawImage(image, x, y, observer);
+		g.drawImage(image, x, y, null);
 		
 		//Trying to make a drop shadow but Player apears under it occasionally.
 		g.setColor(Color.DARK_GRAY);

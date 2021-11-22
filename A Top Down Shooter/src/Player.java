@@ -1,12 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.File;
 import java.io.IOException;
-import java.awt.image.ImageObserver;
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 /**
  * Player class is the class created to add the player into the game. The pixel
@@ -17,8 +15,7 @@ import javax.imageio.ImageIO;
  */
 public class Player extends Asset {
 	//Initializing player character and updater
-	private ImageObserver observer;
-	private static Image image;
+	private BufferedImage image;
 	private int count = 0;
 
 	AssetController assetController;
@@ -36,10 +33,9 @@ public class Player extends Asset {
 		super(x, y, id);
 		this.assetController = assetController;
 		
-		observer = null;
 		if(count == 0) {
 			try {
-				image = ImageIO.read(new File("A Top Down Shooter/src/Player_Sprite.png"));
+				image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -160,7 +156,7 @@ public class Player extends Asset {
 		g2d.setColor(Color.blue);
 		g2d.fill(hitBox2());
 		
-		g.drawImage(image, x, y, observer);
+		g.drawImage(image, x, y, null);
 		//g.setColor(Color.cyan);
 		//g.fillRect(x, y, 32, 48);
 	}
