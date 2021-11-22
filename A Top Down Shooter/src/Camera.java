@@ -35,8 +35,8 @@ public class Camera {
             x = 1316;
         if (y <= 0)
             y = 0;
-        if (y >= 3040)
-            y = 3040;
+        if (y >= 712)
+            y = 712;
 
     }
 

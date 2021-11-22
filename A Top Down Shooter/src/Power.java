@@ -31,14 +31,11 @@ public class Power extends Asset{
 
     /**
 	 * render method to render the power zones into the game.
-     * used only once to keep power zone under player.
+     * used only once to keep power zone under player. (CHANGED)
 	 */
     public void render(Graphics g) {
-		if(count == 0) {
-            g.setColor(Color.orange);
-            g.fillRect(x, y, 32, 32);
-            count = 1;
-        }
+        g.setColor(Color.YELLOW);
+        g.fillRect(x, y, 32, 32);
 	}
 
     /**

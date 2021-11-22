@@ -88,7 +88,7 @@ public class Player extends Asset {
 
 					if (dY > 0) {
 						dY = 0;
-						y = tempAsset.getY() - 32;
+						y = tempAsset.getY() - 48;
 					} else if (dY < 0) {
 						dY = 0;
 						y = tempAsset.getY() + 32;
@@ -116,16 +116,6 @@ public class Player extends Asset {
 
 				}
 			}
-
-
-
-
-
-
-
-
-
-
 		}
 	}
 
