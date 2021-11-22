@@ -1,5 +1,5 @@
 import java.awt.Graphics;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * The AssetController class is one of the most important classes in the
@@ -11,7 +11,7 @@ import java.util.LinkedList;
  */
 public class AssetController {
 
-	public LinkedList<Asset> asset = new LinkedList<Asset>();
+	public ArrayList<Asset> asset = new ArrayList<Asset>();
 	private boolean up = false, down = false, left = false, right = false, sprint = false;
 
 	/**

@@ -23,36 +23,37 @@ public class Enemy extends Asset {
     }
 
     public void update() {
-        x += dX;
-        y += dY;
-
-        for(int i = 0; i < assetController.asset.size(); i++) {
+		
+		for(int i = 0; i < assetController.asset.size(); i++) {
 			if(assetController.asset.get(i).getID() == ID.Player) {
-                diffX = x - assetController.asset.get(i).getX(); // calculates the difference between the enemy's x and the player's x
+				diffX = x - assetController.asset.get(i).getX(); // calculates the difference between the enemy's x and the player's x
                 diffY = y - assetController.asset.get(i).getY(); // calculates the difference between the enemy's y and the player's y
                 distance = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2)); // Calculates total distance
-                }
+			}
         }
         // Enemy only moves within 640 pixels of the player
         if (distance <= 640) {
-            if (diffX <= 0) {
-                dX = 1;
+			if (diffX <= 0) {
+				dX = 1;
             }
             else if (diffX >= 0){
-                dX = -1;
+				dX = -1;
             }
-
+			
             if (diffY <= 0) {
-                dY = 1;
+				dY = 1;
             }
             else if (diffY >= 0){
-                dY = -1;
+				dY = -1;
             }
         } else {
-            dX = 0;
+			dX = 0;
             dY = 0;
         }
 
+		x += dX;
+		y += dY;
+		
         //Collision();
     }
 
