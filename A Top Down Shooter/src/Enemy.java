@@ -32,7 +32,7 @@ public class Enemy extends Asset {
 			}
         }
         // Enemy only moves within 640 pixels of the player
-        if (distance <= 640) {
+        if (distance <= 640 && distance != 0) {
 			if (diffX <= 0) {
 				dX = 1;
             }
@@ -54,7 +54,7 @@ public class Enemy extends Asset {
 		x += dX;
 		y += dY;
 		
-        //Collision();
+        Collision();
     }
 
     /**
@@ -63,6 +63,9 @@ public class Enemy extends Asset {
 	 */
 	private void Collision() {
 		for (int i = 0; i < assetController.asset.size(); i++) {
+			if (assetController.asset.size() <= i) {
+				break;
+			}
 			Asset tempAsset = assetController.asset.get(i);
 			if (tempAsset.getID() == ID.Wall) {
 				if (hitBox().intersects(tempAsset.hitBox())) {
@@ -86,8 +89,8 @@ public class Enemy extends Asset {
 						y = tempAsset.getY() + 32;
 					}
 				}
-            }
-        }
+			}
+		}
     }
 
     public void render(Graphics g) {

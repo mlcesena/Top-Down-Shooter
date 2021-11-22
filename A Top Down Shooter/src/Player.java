@@ -149,12 +149,12 @@ public class Player extends Asset {
 	 */
 	public void render(Graphics g) {
 
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.red);
-		g2d.fill(hitBox());
+		// Graphics2D g2d = (Graphics2D) g;
+		// g2d.setColor(Color.red);
+		// g2d.fill(hitBox());
 
-		g2d.setColor(Color.blue);
-		g2d.fill(hitBox2());
+		// g2d.setColor(Color.blue);
+		// g2d.fill(hitBox2());
 		
 		g.drawImage(image, x, y, null);
 		//g.setColor(Color.cyan);

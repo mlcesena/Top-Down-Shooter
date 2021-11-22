@@ -44,7 +44,8 @@ public class ImageLoader {
 	/**
 	 * loadLevel is a method used to load in a specific level by reading images and
 	 * scanning the entire image, comparing the RGB values of each pixel to the map
-	 * key RGB values in order to create new objects based on the RGB.
+	 * key RGB values in order to create new objects based on the RGB. Player is
+	 * always generated last.
 	 */
 	public void loadLevel() {
 
