@@ -4,7 +4,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
-//FIXME
+/**
+ * Game class is the main class for our game! It is the file you need to run for the game to work.
+ * 
+ * @author Tyler Battershell
+ */
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
@@ -16,8 +20,6 @@ public class Game extends Canvas implements Runnable {
 	private AssetController assetController;
 	private Camera camera;
 	
-	
-
 	/**
 	 * Default Game constructor. When this is called, a new window is created, the
 	 * game is started, the appropriate variables are declared, and the level is
