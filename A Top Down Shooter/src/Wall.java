@@ -56,8 +56,8 @@ public class Wall extends Asset {
 		g.drawImage(image, x, y, observer);
 		
 		//Trying to make a drop shadow but Player apears under it occasionally.
-		//g.setColor(Color.DARK_GRAY);
-		//g.fillRect(x, y + 32, 32, 16);
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect(x, y + 32, 32, 16);
 		
 	}
 	
