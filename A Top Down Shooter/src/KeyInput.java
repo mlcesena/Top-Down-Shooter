@@ -54,6 +54,7 @@ public class KeyInput implements KeyListener {
 				case KeyEvent.VK_9:
 					//Currently changes levels.
 					ImageLoader.zombieCount = 0;
+					Window.level++;
 					break;
 				}
 			}
