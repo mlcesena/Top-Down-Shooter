@@ -72,10 +72,10 @@ public class Enemy extends Asset {
 
 					if (dX > 0) {
 						dX = 0;
-						x = tempAsset.getX() - 32;
+						x = tempAsset.getX() - 33;
 					} else if (dX < 0) {
 						dX = 0;
-						x = tempAsset.getX() + 32;
+						x = tempAsset.getX() + 33;
 					}
 
 				}
@@ -83,10 +83,10 @@ public class Enemy extends Asset {
 
 					if (dY > 0) {
 						dY = 0;
-						y = tempAsset.getY() - 48;
+						y = tempAsset.getY() - 49;
 					} else if (dY < 0) {
 						dY = 0;
-						y = tempAsset.getY() + 32;
+						y = tempAsset.getY() + 33;
 					}
 				}
 			}
