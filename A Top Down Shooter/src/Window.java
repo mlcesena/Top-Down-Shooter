@@ -19,6 +19,7 @@ public class Window extends JFrame {
 	private JLabel scoreLbl;
 	private JLabel healthLbl;
 	private JLabel levelLbl;
+	private static JFrame frame;
 	protected static int playerScore;
 	protected static int level;
 	private static int playerHealth = 250;
@@ -46,7 +47,7 @@ public class Window extends JFrame {
 		healthLbl.setFont(f);
 		levelLbl.setFont(f);
 
-		JFrame frame = new JFrame(title);
+		frame = new JFrame(title);
 		frame.setPreferredSize(new Dimension(width, height));
 		frame.setMinimumSize(new Dimension(width, height));
 		frame.setMaximumSize(new Dimension(width, height));
@@ -88,4 +89,9 @@ public class Window extends JFrame {
 		playerHealth = playerHealth - 25;
 		healthBar.repaint();
    }
+
+   public static void close() {
+		frame.dispose();
+   }
+
 }

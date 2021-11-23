@@ -37,6 +37,7 @@ public class Enemy extends Asset {
 		//Check if all enemies are gone.
 		if(ImageLoader.zombieCount <= 0) {
 			ImageLoader.level = ImageLoader.level + 1;
+			Window.close();
 			new Game();
 		}
 
