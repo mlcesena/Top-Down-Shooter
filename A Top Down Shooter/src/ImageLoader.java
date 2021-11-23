@@ -9,7 +9,8 @@ import javax.imageio.ImageIO;
  * @author Tyler Battershell
  */
 public class ImageLoader {
-
+	//Changable level to implament stage changes (WIP).
+	public static int level = 0;
 	AssetController assetController;
 
 	/**
@@ -53,7 +54,20 @@ public class ImageLoader {
 		BufferedImage mapColorKey = null;
 
 		mapColorKey = readImage("/images/map_key.png");
-		level_test = readImage("/images/level_test.png");
+		
+		//Checks what level to take the map of (WIP).
+		switch(level) {
+			case 0:
+				level_test = readImage("/images/level_test.png");
+				break;
+			case 1:
+				level_test = readImage("/images/level_test.png");
+				break;
+			case 2:
+				level_test = readImage("/images/level_test.png");
+				break;
+		}
+		
 
 		int h = level_test.getHeight();
 		int w = level_test.getWidth();
