@@ -1,12 +1,17 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Color;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 public class Enemy extends Asset {
     
     AssetController assetController;
     private int diffX, diffY;
     private double distance;
+	private BufferedImage image;
+	private int count = 0;
 
 	/**
 	 * Overloading constructor to create an object of the Player class
@@ -20,6 +25,15 @@ public class Enemy extends Asset {
     public Enemy(int x, int y, ID id, AssetController assetController) {
         super(x, y, id);
         this.assetController = assetController;
+
+		if(count == 0) {
+			try {
+				image = ImageIO.read(getClass().getResource("/images/Enemy_Sprite.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			count = 1;
+		}
     }
 
     public void update() {
@@ -119,8 +133,11 @@ public class Enemy extends Asset {
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.red);
-		g.fillRect(x, y, 32, 48);
+        
+		//g.setColor(Color.red);
+		//g.fillRect(x, y, 32, 48);
+
+		g.drawImage(image, x, y, null);
     }
 
     /**
