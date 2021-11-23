@@ -11,7 +11,6 @@ public class Enemy extends Asset {
     private int diffX, diffY;
     private double distance;
 	private BufferedImage image;
-	private int count = 0;
 
 	/**
 	 * Overloading constructor to create an object of the Player class
@@ -26,14 +25,12 @@ public class Enemy extends Asset {
         super(x, y, id);
         this.assetController = assetController;
 
-		if(count == 0) {
-			try {
-				image = ImageIO.read(getClass().getResource("/images/Enemy_Sprite.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			count = 1;
+		try {
+			image = ImageIO.read(getClass().getResource("/images/Enemy_Sprite.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
     }
 
     public void update() {

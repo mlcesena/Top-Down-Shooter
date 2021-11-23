@@ -16,7 +16,6 @@ import java.awt.image.BufferedImage;
 public class Player extends Asset {
 	//Initializing player character and updater
 	private BufferedImage image;
-	private int count = 0;
 
 	AssetController assetController;
 
@@ -32,15 +31,13 @@ public class Player extends Asset {
 	public Player(int x, int y, ID id, AssetController assetController) {
 		super(x, y, id);
 		this.assetController = assetController;
-		
-		if(count == 0) {
-			try {
-				image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			count = 1;
+	
+		try {
+			image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
 	}
 
 	/**
