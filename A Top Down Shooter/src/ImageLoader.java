@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 public class ImageLoader {
 	//Changable level to implament stage changes (WIP).
 	public static int level = 0;
+	public static int zombieCount = 0;
 	AssetController assetController;
 
 	/**
@@ -87,8 +88,10 @@ public class ImageLoader {
 				else if (pixel == playerPixel) {
 					playerPixelX = imageX;
 					playerPixelY = imageY;
-				} else if (pixel == enemyPixel)
+				} else if (pixel == enemyPixel) {
 					assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
+					zombieCount++;
+				}
 				else if (pixel == powerPixel)
 					assetController.addAsset(new Power(imageX * 32, imageY * 32, ID.Power));
 				
