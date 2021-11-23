@@ -131,8 +131,8 @@ public class Player extends Asset {
 
 				}
 			}
-
-
+			
+			
 			//Areas for other collisions
 
 

@@ -160,7 +160,7 @@ public class Game extends Canvas implements Runnable {
 	public static void setLevel() {
 		Window.level++;
 	}
-
+	
 	/**
 	 * The main game class. Simply creates a new Game when the program is ran.
 	 */

@@ -50,7 +50,7 @@ public class Wall extends Asset {
 	public void render(Graphics g) {
 		g.drawImage(image, x, y, null);
 		
-		//Trying to make a drop shadow but Player apears under it occasionally.
+		//Trying to make a drop shadow but Enemies apear under it
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(x, y + 32, 32, 16);
 		

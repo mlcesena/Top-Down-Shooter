@@ -48,6 +48,8 @@ public class KeyInput implements KeyListener {
 				case KeyEvent.VK_SHIFT:
 					assetController.setSprint(true);
 					break;
+				case KeyEvent.VK_0:
+					Window.setPlayerHealth();
 				}
 			}
 		}

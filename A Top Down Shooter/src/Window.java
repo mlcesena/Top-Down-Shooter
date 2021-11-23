@@ -5,21 +5,25 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
+import java.awt.Color;
 
 /**
  * The Window class implements Java AWT and Java Swing to create a window
  * 
  * @author Tyler Battershell
  */
-public class Window {
+public class Window extends JFrame {
 	private JLabel scoreLbl;
 	private JLabel healthLbl;
 	private JLabel levelLbl;
 	protected static int playerScore;
 	protected static int level;
+	private static int playerHealth = 250;
+	private static JComponent healthBar;
+	
 	/**
 	 * This overloading constructor should always be called when creating a window
 	 * The first block creates the window.
@@ -52,7 +56,17 @@ public class Window {
 
 		healthPanel.add(healthLbl);
 		
-
+		healthBar = new JComponent() {
+			protected void paintComponent(Graphics g) {
+				
+				g.setColor(Color.RED);
+				g.fillRect(0, healthPanel.getHeight() - 55, 250, 40);
+				g.setColor(Color.GREEN);
+				g.fillRect(0, healthPanel.getHeight() - 55, playerHealth, 40);
+			};
+		};
+		healthPanel.add(healthBar);
+		
 		hud.add(scoreLbl);
 		hud.add(healthPanel);
 		hud.add(levelLbl);
@@ -66,8 +80,12 @@ public class Window {
 		frame.setVisible(true);
 	}
 
-	private void paintComponent(Graphics g) {
-		// draw the rectangle here
-		g.drawRect(SwingConstants.CENTER, SwingConstants.CENTER,100, 25);
-	 }
+	public static int getPlayerHealth() {
+		return playerHealth;
+	}
+
+	public static void setPlayerHealth() {
+		playerHealth = playerHealth - 25;
+		healthBar.repaint();
+   }
 }
