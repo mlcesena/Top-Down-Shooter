@@ -90,6 +90,31 @@ public class Enemy extends Asset {
 					}
 				}
 			}
+			// Enemy to enemy collision (If wanted? Glitchy-ish)
+			if (tempAsset.getID() == ID.Enemy && !tempAsset.equals(this)) {
+				if (hitBox().intersects(tempAsset.hitBox())) {
+
+					if (dX > 0) {
+						dX = 0;
+						x = tempAsset.getX() - 33;
+					} else if (dX < 0) {
+						dX = 0;
+						x = tempAsset.getX() + 33;
+					}
+
+				}
+				if (hitBox2().intersects(tempAsset.hitBox())) {
+
+					if (dY > 0) {
+						dY = 0;
+						y = tempAsset.getY() - 49;
+					} else if (dY < 0) {
+						dY = 0;
+						y = tempAsset.getY() + 33;
+					}
+
+				}
+			}
 		}
     }
 
