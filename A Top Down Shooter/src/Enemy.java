@@ -46,6 +46,7 @@ public class Enemy extends Asset {
 			}
         }
         // Enemy only moves within 640 pixels of the player
+		//Sets directional movement
         if (distance <= 640 && distance != 0) {
 			if (diffX <= 0) {
 				dX = 1;
