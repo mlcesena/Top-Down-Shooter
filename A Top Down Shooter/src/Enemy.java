@@ -49,9 +49,19 @@ public class Enemy extends Asset {
         if (distance <= 640 && distance != 0) {
 			if (diffX <= 0) {
 				dX = 1;
+				try {
+					image = ImageIO.read(getClass().getResource("/images/Enemy_Sprite.png"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
             }
             else if (diffX >= 0){
 				dX = -1;
+				try {
+					image = ImageIO.read(getClass().getResource("/images/Enemy_Sprite_Left.png"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
             }
 			
             if (diffY <= 0) {

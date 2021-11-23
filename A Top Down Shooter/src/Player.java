@@ -61,13 +61,25 @@ public class Player extends Asset {
 		else if (!assetController.isUp())
 			dY = 0;
 
-		if (assetController.isLeft())
+		if (assetController.isLeft()) {
 			dX = -5;
+			try {
+				image = ImageIO.read(getClass().getResource("/images/Player_Sprite_Left.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		else if (!assetController.isRight())
 			dX = 0;
 
-		if (assetController.isRight())
+		if (assetController.isRight()) {
 			dX = 5;
+			try {
+				image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		else if (!assetController.isLeft())
 			dX = 0;
 
