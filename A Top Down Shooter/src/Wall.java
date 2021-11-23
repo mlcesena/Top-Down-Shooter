@@ -13,8 +13,8 @@ import java.awt.image.BufferedImage;
  */
 public class Wall extends Asset {
 	//Initializing wall and updater
-	private BufferedImage image;
-	private int count = 0;
+	private static BufferedImage image;
+	private static int count = 0;
 	
 
 	/**
