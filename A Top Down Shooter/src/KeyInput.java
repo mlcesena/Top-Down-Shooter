@@ -50,6 +50,11 @@ public class KeyInput implements KeyListener {
 					break;
 				case KeyEvent.VK_0:
 					Window.setPlayerHealth();
+					break;
+				case KeyEvent.VK_9:
+					//Currently changes levels.
+					ImageLoader.zombieCount = 0;
+					break;
 				}
 			}
 		}

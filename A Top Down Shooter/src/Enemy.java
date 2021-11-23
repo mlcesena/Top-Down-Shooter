@@ -34,7 +34,12 @@ public class Enemy extends Asset {
     }
 
     public void update() {
-		
+		//Check if all enemies are gone.
+		if(ImageLoader.zombieCount <= 0) {
+			ImageLoader.level = ImageLoader.level + 1;
+			new Game();
+		}
+
 		for(int i = 0; i < assetController.asset.size(); i++) {
 			if(assetController.asset.get(i).getID() == ID.Player) {
 				diffX = x - assetController.asset.get(i).getX(); // calculates the difference between the enemy's x and the player's x

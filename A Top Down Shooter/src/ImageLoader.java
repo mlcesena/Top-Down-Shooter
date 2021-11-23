@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
  */
 public class ImageLoader {
 	//Changable level to implament stage changes (WIP).
-	public static int level = 0;
-	public static int zombieCount = 0;
+	public static int level;
+	public static int zombieCount;
 	AssetController assetController;
 
 	/**
@@ -58,14 +58,14 @@ public class ImageLoader {
 		
 		//Checks what level to take the map of (WIP).
 		switch(level) {
-			case 0:
+			default:
 				level_test = readImage("/images/level_test.png");
 				break;
 			case 1:
-				level_test = readImage("/images/level_test.png");
+				level_test = readImage("/images/level_test_1.png");
 				break;
 			case 2:
-				level_test = readImage("/images/level_test.png");
+				level_test = readImage("/images/level_test_2.png");
 				break;
 		}
 		
