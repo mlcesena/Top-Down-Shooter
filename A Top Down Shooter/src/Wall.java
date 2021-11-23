@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 /**
  * Wall class is the class created to add walls into the game. Each pixel with
@@ -9,6 +12,10 @@ import java.awt.Rectangle;
  * @author Tyler Battershell
  */
 public class Wall extends Asset {
+	//Initializing wall and updater
+	private BufferedImage image;
+	private int count = 0;
+	
 
 	/**
 	 * Overloading constructor to create an object of the Wall class
@@ -19,6 +26,16 @@ public class Wall extends Asset {
 	 */
 	public Wall(int x, int y, ID id) {
 		super(x, y, id);
+		
+		if(count == 0) {
+			try {
+				image = ImageIO.read(getClass().getResource("/images/Test_Wall_Sprite.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			count = 1;
+		}
+
 	}
 
 	/**
@@ -31,8 +48,12 @@ public class Wall extends Asset {
 	 * render method to render the walls into the game.
 	 */
 	public void render(Graphics g) {
-		g.setColor(Color.lightGray);
-		g.fillRect(x, y, 32, 32);
+		g.drawImage(image, x, y, null);
+		
+		//Trying to make a drop shadow but Player apears under it occasionally.
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect(x, y + 32, 32, 16);
+		
 	}
 	
 	/**

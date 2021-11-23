@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 /**
  * Player class is the class created to add the player into the game. The pixel
@@ -11,6 +14,9 @@ import java.awt.Rectangle;
  * @author Tyler Battershell
  */
 public class Player extends Asset {
+	//Initializing player character and updater
+	private BufferedImage image;
+	private int count = 0;
 
 	AssetController assetController;
 
@@ -26,6 +32,15 @@ public class Player extends Asset {
 	public Player(int x, int y, ID id, AssetController assetController) {
 		super(x, y, id);
 		this.assetController = assetController;
+		
+		if(count == 0) {
+			try {
+				image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			count = 1;
+		}
 	}
 
 	/**
@@ -88,7 +103,7 @@ public class Player extends Asset {
 
 					if (dY > 0) {
 						dY = 0;
-						y = tempAsset.getY() - 32;
+						y = tempAsset.getY() - 48;
 					} else if (dY < 0) {
 						dY = 0;
 						y = tempAsset.getY() + 32;
@@ -118,7 +133,7 @@ public class Player extends Asset {
 			}
 
 
-
+			//Areas for other collisions
 
 
 
@@ -134,15 +149,16 @@ public class Player extends Asset {
 	 */
 	public void render(Graphics g) {
 
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.red);
-		g2d.fill(hitBox());
+		// Graphics2D g2d = (Graphics2D) g;
+		// g2d.setColor(Color.red);
+		// g2d.fill(hitBox());
 
-		g2d.setColor(Color.blue);
-		g2d.fill(hitBox2());
-
-		g.setColor(Color.cyan);
-		g.fillRect(x, y, 32, 48);
+		// g2d.setColor(Color.blue);
+		// g2d.fill(hitBox2());
+		
+		g.drawImage(image, x, y, null);
+		//g.setColor(Color.cyan);
+		//g.fillRect(x, y, 32, 48);
 	}
 
 	/**
