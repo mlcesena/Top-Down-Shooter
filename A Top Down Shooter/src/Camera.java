@@ -37,6 +37,11 @@ public class Camera {
             y = 0;
         if (y >= 712)
             y = 712;
+        if(ImageLoader.level == 0) {
+            x = 0;
+            y = 0;
+        }
+
 
     }
 

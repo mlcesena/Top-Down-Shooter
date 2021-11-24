@@ -86,16 +86,16 @@ public class Window extends JFrame {
 	}
 
 	public static void subtractPlayerHealth() {
-		playerHealth -= 25;
+		playerHealth -= 10;
 		healthBar.repaint();
-   }
+	}
 
-   public static void setPlayerHealth(int newHealth) {
+  	public static void setPlayerHealth(int newHealth) {
 	   playerHealth = newHealth;
-   }
+   	}
 
-   public static void close() {
+   	public static void close() {
 		frame.dispose();
-   }
+  	 }
 
 }
