@@ -85,9 +85,13 @@ public class Window extends JFrame {
 		return playerHealth;
 	}
 
-	public static void setPlayerHealth() {
-		playerHealth = playerHealth - 25;
+	public static void subtractPlayerHealth() {
+		playerHealth -= 25;
 		healthBar.repaint();
+   }
+
+   public static void setPlayerHealth(int newHealth) {
+	   playerHealth = newHealth;
    }
 
    public static void close() {

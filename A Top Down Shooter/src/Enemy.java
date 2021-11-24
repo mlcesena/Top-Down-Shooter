@@ -35,7 +35,7 @@ public class Enemy extends Asset {
 
     public void update() {
 		//Check if all enemies are gone.
-		if(ImageLoader.zombieCount <= 0) {
+		if(ImageLoader.enemyCount <= 0) {
 			ImageLoader.level = ImageLoader.level + 1;
 			Window.close();
 			new Game();
@@ -145,7 +145,16 @@ public class Enemy extends Asset {
 			}
 			if (tempAsset.getID() == ID.Player) {
 				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
-						Window.setPlayerHealth();
+						Window.subtractPlayerHealth();
+						// Potential Knockback mechanic?? (Could be tough, allows enemies to "hit" the player through walls)
+						if (diffX < 0)
+							tempAsset.dX = 10;
+						else if (diffX > 0)
+							tempAsset.dX = -10;
+						if (diffY < 0)
+							tempAsset.dY = 10;
+						else if (diffY > 0)
+							tempAsset.dY = -10;
 				}
 
 			}

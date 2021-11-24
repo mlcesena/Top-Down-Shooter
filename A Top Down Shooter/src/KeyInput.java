@@ -49,11 +49,11 @@ public class KeyInput implements KeyListener {
 					assetController.setSprint(true);
 					break;
 				case KeyEvent.VK_0:
-					Window.setPlayerHealth();
+					Window.subtractPlayerHealth();
 					break;
 				case KeyEvent.VK_9:
 					//Currently changes levels.
-					ImageLoader.zombieCount = 0;
+					ImageLoader.enemyCount = 0;
 					Window.level++;
 					break;
 				}
