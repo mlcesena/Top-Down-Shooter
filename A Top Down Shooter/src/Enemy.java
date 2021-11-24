@@ -143,6 +143,12 @@ public class Enemy extends Asset {
 
 				}
 			}
+			if (tempAsset.getID() == ID.Player) {
+				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+						Window.setPlayerHealth();
+				}
+
+			}
 		}
     }
 
