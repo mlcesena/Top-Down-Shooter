@@ -86,7 +86,7 @@ public class Window extends JFrame {
 	}
 
 	public static void setPlayerHealth() {
-		playerHealth = playerHealth - 25;
+		playerHealth = playerHealth - 10;
 		healthBar.repaint();
    }
 
