@@ -137,7 +137,7 @@ public class Game extends Canvas implements Runnable {
 		/* \/ DRAW HERE \/ */
 		/* ========================================== */
 
-		g.setColor(Color.ORANGE);
+		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, 0, 1900, 1000);
 
 		g2d.translate(-camera.getX(), -camera.getY());

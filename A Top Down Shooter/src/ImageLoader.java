@@ -130,6 +130,10 @@ public class ImageLoader {
 	 * Resets variables and removes all current assets.
 	 */
 	public void newLevel() {
+		for (int i = 0; i < assetController.asset.size(); i++) {
+			Asset tempAsset = assetController.asset.get(i);
+			assetController.removeAsset(tempAsset);
+		}
 		Window.setPlayerHealth(250);
 		Window.healthBar.repaint();
 		Window.level++;
