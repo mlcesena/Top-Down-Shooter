@@ -37,6 +37,8 @@ public class Enemy extends Asset {
 		//Check if all enemies are gone.
 		if(ImageLoader.enemyCount <= 0) {
 			ImageLoader.level = ImageLoader.level + 1;
+			ImageLoader loader = new ImageLoader(assetController);
+			loader.newLevel();
 			Window.close();
 			new Game();
 		}
@@ -50,7 +52,7 @@ public class Enemy extends Asset {
         }
         // Enemy only moves within 640 pixels of the player
 		//Sets directional movement
-        if (distance <= 640 && distance != 0) {
+        if (distance <= 600 && distance != 0) {
 			if (diffX <= 0) {
 				dX = 1;
 				try {
