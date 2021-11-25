@@ -48,6 +48,11 @@ public class KeyInput implements KeyListener {
 				case KeyEvent.VK_SHIFT:
 					assetController.setSprint(true);
 					break;
+				case KeyEvent.VK_R:
+					ImageLoader.level = 0;
+					Window.playerScore = 0;
+					Game.imageLoader.loadLevel();
+					break;
 				case KeyEvent.VK_SPACE:
 					if(ImageLoader.level == 0) {
 						ImageLoader.level = ImageLoader.level + 1;

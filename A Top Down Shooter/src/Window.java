@@ -20,7 +20,7 @@ public class Window extends JFrame {
 	private JLabel healthLbl;
 	private JLabel levelLbl;
 	private static JFrame frame;
-	protected static int playerScore;
+	protected static int playerScore = 0;
 	protected static int level = 0;
 	private static int playerHealth = 250;
 	public static JComponent healthBar;

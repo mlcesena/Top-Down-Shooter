@@ -60,7 +60,12 @@ public class ImageLoader {
 		//Checks what level to take the map of (WIP).
 		switch(level) {
 			case 0:
+				newLevel();
 				level_test = readImage("/images/Title_Placeholder.png");
+				break;
+			case -1:
+				newLevel();
+				level_test = readImage("/images/Game_Over.png");
 				break;
 			case 1:
 				newLevel();

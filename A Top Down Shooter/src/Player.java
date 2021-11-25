@@ -45,6 +45,8 @@ public class Player extends Asset {
 	 * assetController's booleans, which are updated in the KeyInput class.
 	 */
 	public void update() {
+		isPlayerDead();
+		
 		x += dX;
 		y += dY;
 
@@ -87,6 +89,13 @@ public class Player extends Asset {
 
 		Collision();
 
+	}
+
+	private void isPlayerDead() {
+		if(Window.getPlayerHealth() <= 0) {
+			ImageLoader.level = -1;
+			Game.imageLoader.loadLevel();
+		}
 	}
 
 	/**
