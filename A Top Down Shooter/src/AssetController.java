@@ -102,4 +102,8 @@ public class AssetController {
 		this.sprint = sprint;
 	}
 
+	public void setAllFalse() {
+		up = false; down = false; left = false; right = false; sprint = false;
+	}
+
 }

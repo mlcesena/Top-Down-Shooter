@@ -135,6 +135,7 @@ public class ImageLoader {
 		Window.healthBar.repaint();
 		Window.level++;
 		Wall.count = 0;
+		assetController.setAllFalse();
 		assetController.newAssetList();
 	}
 
