@@ -131,6 +131,7 @@ public class ImageLoader {
 	 */
 	public void newLevel() {
 		Window.setPlayerHealth(250);
+		Window.healthBar.repaint();
 		Window.level++;
 		assetController.newAssetList();
 	}

@@ -23,7 +23,7 @@ public class Window extends JFrame {
 	protected static int playerScore;
 	protected static int level = 0;
 	private static int playerHealth = 250;
-	private static JComponent healthBar;
+	public static JComponent healthBar;
 	
 	/**
 	 * This overloading constructor should always be called when creating a window
