@@ -58,25 +58,21 @@ public class ImageLoader {
 		mapColorKey = readImage("/images/map_key.png");
 		
 		//Checks what level to take the map of (WIP).
+		newLevel();
 		switch(level) {
 			case 0:
-				newLevel();
 				level_test = readImage("/images/Title_Placeholder.png");
 				break;
-			case -1:
-				newLevel();
+			case 999:
 				level_test = readImage("/images/Game_Over.png");
 				break;
 			case 1:
-				newLevel();
 				level_test = readImage("/images/level_test.png");
 				break;
 			case 2:
-				newLevel();
 				level_test = readImage("/images/level_test_1.png");
 				break;
 			default:
-				newLevel();
 				level_test = readImage("/images/level_test_2.png");
 				break;
 		}
@@ -96,7 +92,7 @@ public class ImageLoader {
 				int pixel = getRGB(imageX, imageY, level_test);
 				
 				if (pixel == wallPixel)
-					assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall));
+					assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
 				else if (pixel == playerPixel) {
 					playerPixelX = imageX;
 					playerPixelY = imageY;
@@ -138,6 +134,7 @@ public class ImageLoader {
 		Window.setPlayerHealth(250);
 		Window.healthBar.repaint();
 		Window.level++;
+		Wall.count = 0;
 		assetController.newAssetList();
 	}
 

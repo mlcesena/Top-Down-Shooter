@@ -93,7 +93,7 @@ public class Player extends Asset {
 
 	private void isPlayerDead() {
 		if(Window.getPlayerHealth() <= 0) {
-			ImageLoader.level = -1;
+			ImageLoader.level = 999;
 			Game.imageLoader.loadLevel();
 		}
 	}
