@@ -75,7 +75,7 @@ public class Window extends JFrame {
 		
 		frame.add(game);
 		frame.add(hud, BorderLayout.NORTH);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
