@@ -51,17 +51,16 @@ public class KeyInput implements KeyListener {
 				case KeyEvent.VK_SPACE:
 					if(ImageLoader.level == 0) {
 						ImageLoader.level = ImageLoader.level + 1;
-						Window.close();
-						new Game();
+						Game.imageLoader.loadLevel();
 					}
 					break;
+				//Testing Keys
 				case KeyEvent.VK_0:
 					Window.subtractPlayerHealth();
 					break;
 				case KeyEvent.VK_9:
 					//Currently changes levels.
 					ImageLoader.enemyCount = 0;
-					Window.level++;
 					break;
 				}
 			}

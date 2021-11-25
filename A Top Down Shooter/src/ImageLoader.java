@@ -131,10 +131,8 @@ public class ImageLoader {
 	 */
 	public void newLevel() {
 		Window.setPlayerHealth(250);
-		for (int i = 0; i < assetController.asset.size(); i++) {
-			Asset tempAsset = assetController.asset.get(i);
-			assetController.removeAsset(tempAsset);
-		}
+		Window.level++;
+		assetController.newAssetList();
 	}
 
 }
