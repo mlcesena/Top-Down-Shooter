@@ -19,6 +19,7 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private AssetController assetController;
 	private Camera camera;
+	public static ImageLoader imageLoader;
 	
 	/**
 	 * Default Game constructor. When this is called, a new window is created, the
@@ -33,7 +34,7 @@ public class Game extends Canvas implements Runnable {
 		camera = new Camera(0, 0);
 		this.addKeyListener(new KeyInput(assetController));
 
-		ImageLoader imageLoader = new ImageLoader(assetController);
+		imageLoader = new ImageLoader(assetController);
 		imageLoader.loadLevel();
 
 	}

@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
  */
 public class ImageLoader {
 	//Changable level to implament stage changes (WIP).
-	public static int level = 1;
-	public static int zombieCount;
+	public static int enemyCount;
+	public static int level = 0;
 	AssetController assetController;
 
 	/**
@@ -57,7 +57,14 @@ public class ImageLoader {
 		mapColorKey = readImage("/images/map_key.png");
 		
 		//Checks what level to take the map of (WIP).
+		newLevel();
 		switch(level) {
+			case 0:
+				level_test = readImage("/images/Title_Placeholder.png");
+				break;
+			case 999:
+				level_test = readImage("/images/Game_Over.png");
+				break;
 			case 1:
 				level_test = readImage("/images/level_test.png");
 				break;
@@ -84,13 +91,13 @@ public class ImageLoader {
 				int pixel = getRGB(imageX, imageY, level_test);
 				
 				if (pixel == wallPixel)
-					assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall));
+					assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
 				else if (pixel == playerPixel) {
 					playerPixelX = imageX;
 					playerPixelY = imageY;
 				} else if (pixel == enemyPixel) {
 					assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
-					zombieCount++;
+					enemyCount++;
 				}
 				else if (pixel == powerPixel)
 					assetController.addAsset(new Power(imageX * 32, imageY * 32, ID.Power));
@@ -116,6 +123,19 @@ public class ImageLoader {
 			e.printStackTrace();
 		}
 		return image;
+	}
+
+	/**
+	 * newLevel is a method that should be called each time a new level is loaded.
+	 * Resets variables and removes all current assets.
+	 */
+	public void newLevel() {
+		Window.setPlayerHealth(250);
+		Window.healthBar.repaint();
+		Window.level++;
+		Wall.count = 0;
+		assetController.setAllFalse();
+		assetController.newAssetList();
 	}
 
 }

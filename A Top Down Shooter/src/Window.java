@@ -20,10 +20,10 @@ public class Window extends JFrame {
 	private JLabel healthLbl;
 	private JLabel levelLbl;
 	private static JFrame frame;
-	protected static int playerScore;
-	protected static int level = 1;
+	protected static int playerScore = 0;
+	protected static int level = 0;
 	private static int playerHealth = 250;
-	private static JComponent healthBar;
+	public static JComponent healthBar;
 	
 	/**
 	 * This overloading constructor should always be called when creating a window
@@ -85,13 +85,13 @@ public class Window extends JFrame {
 		return playerHealth;
 	}
 
-	public static void setPlayerHealth() {
-		playerHealth = playerHealth - 25;
+	public static void subtractPlayerHealth() {
+		playerHealth -= 10;
 		healthBar.repaint();
-   }
+	}
 
-   public static void close() {
-		frame.dispose();
-   }
+  	public static void setPlayerHealth(int newHealth) {
+	   playerHealth = newHealth;
+   	}
 
 }

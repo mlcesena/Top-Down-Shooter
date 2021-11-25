@@ -31,12 +31,17 @@ public class Camera {
 
         if (x <= 0)
             x = 0;
-        if (x >= 1316)
-            x = 1316;
+        if (x >= 1670)
+            x = 1670;
         if (y <= 0)
             y = 0;
-        if (y >= 712)
-            y = 712;
+        if (y >= 842)
+            y = 842;
+        if(ImageLoader.level == 0) {
+            x = 0;
+            y = 0;
+        }
+
 
     }
 
