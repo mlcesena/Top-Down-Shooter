@@ -1,6 +1,5 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.Color;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -147,10 +146,6 @@ public class Enemy extends Asset {
     }
 
     public void render(Graphics g) {
-        
-		//g.setColor(Color.red);
-		//g.fillRect(x, y, 32, 48);
-
 		g.drawImage(image, x, y, null);
     }
 

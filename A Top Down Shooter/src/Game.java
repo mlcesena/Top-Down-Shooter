@@ -50,16 +50,16 @@ public class Game extends Canvas implements Runnable {
 	/**
 	 *  Pause the game.
 	 */
-	private void pause() {
-		gameRunning = false;
-	}
+	// private void pause() {
+	// 	gameRunning = false;
+	// }
 	
 	/**
 	 *  Resumes the game.
 	 */
-	private void resume() {
-		gameRunning = true;
-	}
+	// private void resume() {
+	// 	gameRunning = true;
+	// }
 
 	/**
 	 * Stops the game, waits for the thread to stop

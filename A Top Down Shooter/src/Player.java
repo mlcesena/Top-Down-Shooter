@@ -1,6 +1,4 @@
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -157,17 +155,7 @@ public class Player extends Asset {
 	 * render method to render the player into the game.
 	 */
 	public void render(Graphics g) {
-
-		// Graphics2D g2d = (Graphics2D) g;
-		// g2d.setColor(Color.red);
-		// g2d.fill(hitBox());
-
-		// g2d.setColor(Color.blue);
-		// g2d.fill(hitBox2());
-		
 		g.drawImage(image, x, y, null);
-		//g.setColor(Color.cyan);
-		//g.fillRect(x, y, 32, 48);
 	}
 
 	/**
