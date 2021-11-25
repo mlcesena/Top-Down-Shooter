@@ -12,7 +12,6 @@ public class ImageLoader {
 	//Changable level to implament stage changes (WIP).
 	public static int enemyCount;
 	public static int level = 0;
-	public static int zombieCount;
 	AssetController assetController;
 
 	/**
