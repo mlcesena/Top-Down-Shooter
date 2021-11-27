@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Cursor;
 
 /**
  * The Window class implements Java AWT and Java Swing to create a window
@@ -72,7 +73,8 @@ public class Window extends JFrame {
 		hud.add(healthPanel);
 		hud.add(levelLbl);
 		hud.setPreferredSize(new Dimension(width, 75));
-		
+
+		frame.setCursor(new Cursor(1));
 		frame.add(game);
 		frame.add(hud, BorderLayout.NORTH);
 		frame.setResizable(false);
