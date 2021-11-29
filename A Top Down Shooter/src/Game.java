@@ -26,7 +26,7 @@ public class Game extends Canvas implements Runnable {
 	 * loaded.
 	 */
 	public Game() {
-		new Window(1900, 1000, "Top Down Shooter", this);
+		new Window(1650, 1000, "Top Down Shooter", this);
 		start();
 
 		assetController = new AssetController();
@@ -98,6 +98,11 @@ public class Game extends Canvas implements Runnable {
 				timeChange--;
 			}
 			render();
+			if (Window.getPlayerHealth() == 0) {
+				new Window(1650, 1000, "Top Down Shooter");
+				pause();
+			}
+				
 		}
 		stop();
 	}
@@ -112,7 +117,7 @@ public class Game extends Canvas implements Runnable {
 			if(assetController.asset.get(i).getID() == ID.Player)
 				camera.update(assetController.asset.get(i));
 		}
-
+		
 		assetController.update();
 	}
 
@@ -155,10 +160,6 @@ public class Game extends Canvas implements Runnable {
 
 	public static void setScore() {
 		Window.playerScore++;
-	}
-
-	public static void setLevel() {
-		Window.level++;
 	}
 	
 	/**

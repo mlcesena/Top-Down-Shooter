@@ -140,6 +140,11 @@ public class Player extends Asset {
 
 				}
 			}
+			if (tempAsset.getID() == ID.Enemy) {
+				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+					Window.setPlayerHealth();
+				}
+			}
 			
 			
 			//Areas for other collisions
