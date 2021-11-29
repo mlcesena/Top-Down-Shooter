@@ -102,6 +102,7 @@ public class Game extends Canvas implements Runnable {
 			}
 			render();
 			if (Window.getPlayerHealth() == 0) {
+				Window.setPlayerHealth(200);
 				new Window(1650, 1000, "Top Down Shooter");
 			}
 				
