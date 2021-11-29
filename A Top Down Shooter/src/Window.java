@@ -97,41 +97,41 @@ public class Window extends JFrame {
 		frame.setVisible(true);
 	}
 
-	// public Window(int width, int height, String title) {
-	// 	Font f = new Font("Courier", Font.BOLD, 75);
-	// 	Font f2 = new Font("Courier", Font.PLAIN, 40);
-	// 	fr = new JFrame(title);
-	// 	JButton reset = new JButton("Play Again");
-	// 	JPanel endPanel = new JPanel();
-	// 	endPanel.setLayout(new BoxLayout(endPanel, BoxLayout.PAGE_AXIS));
-	// 	reset.addActionListener(e -> resetGame());
-	// 	reset.setFont(new Font("Courier", Font.PLAIN, 25));
-	// 	gameOverLbl = new JLabel("Game Over", SwingConstants.CENTER);
-	// 	endScoreLbl = new JLabel("Score: " + playerScore, SwingConstants.CENTER);
-	// 	gameOverLbl.setFont(f);
-	// 	endScoreLbl.setFont(f2);
+	public Window(int width, int height, String title) {
+		Font f = new Font("Courier", Font.BOLD, 75);
+		Font f2 = new Font("Courier", Font.PLAIN, 40);
+		fr = new JFrame(title);
+		JButton reset = new JButton("Play Again");
+		JPanel endPanel = new JPanel();
+		endPanel.setLayout(new BoxLayout(endPanel, BoxLayout.PAGE_AXIS));
+		reset.addActionListener(e -> resetGame());
+		reset.setFont(new Font("Courier", Font.PLAIN, 25));
+		gameOverLbl = new JLabel("Game Over", SwingConstants.CENTER);
+		endScoreLbl = new JLabel("Score: " + playerScore, SwingConstants.CENTER);
+		gameOverLbl.setFont(f);
+		endScoreLbl.setFont(f2);
 
-	// 	gameOverLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
-	// 	endScoreLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
-	// 	reset.setAlignmentX(Component.CENTER_ALIGNMENT);
+		gameOverLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
+		endScoreLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
+		reset.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-	// 	endPanel.add(Box.createRigidArea(new Dimension(0, 250)));
-	// 	endPanel.add(gameOverLbl);
-	// 	endPanel.add(Box.createRigidArea(new Dimension(0, 150)));
-	// 	endPanel.add(endScoreLbl);
-	// 	endPanel.add(Box.createRigidArea(new Dimension(0, 50)));
-	// 	endPanel.add(reset);
+		endPanel.add(Box.createRigidArea(new Dimension(0, 250)));
+		endPanel.add(gameOverLbl);
+		endPanel.add(Box.createRigidArea(new Dimension(0, 150)));
+		endPanel.add(endScoreLbl);
+		endPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+		endPanel.add(reset);
 		
-	// 	fr.add(endPanel);
-	// 	fr.setPreferredSize(new Dimension(width, height));
-	// 	fr.setMinimumSize(new Dimension(width, height));
-	// 	fr.setMaximumSize(new Dimension(width, height));
-	// 	fr.setResizable(false);
-	// 	fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	// 	fr.setLocationRelativeTo(null);
-	// 	fr.setVisible(true);
-	// 	close();
-	// }
+		fr.add(endPanel);
+		fr.setPreferredSize(new Dimension(width, height));
+		fr.setMinimumSize(new Dimension(width, height));
+		fr.setMaximumSize(new Dimension(width, height));
+		fr.setResizable(false);
+		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fr.setLocationRelativeTo(null);
+		fr.setVisible(true);
+		close();
+	}
 
 	public static int getPlayerHealth() {
 		return playerHealth;
@@ -162,6 +162,9 @@ public class Window extends JFrame {
 		playerAmmo = 20;
 		playerScore = 0;
 		level = 1;
+		ImageLoader.level = 0;
+		Window.playerScore = 0;
+		Game.imageLoader.loadLevel();
 		Game.main(null);
 	}
 
