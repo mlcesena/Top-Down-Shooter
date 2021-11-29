@@ -1,6 +1,5 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.Color;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -35,10 +34,9 @@ public class Enemy extends Asset {
 
     public void update() {
 		//Check if all enemies are gone.
-		if(ImageLoader.zombieCount <= 0) {
+		if(ImageLoader.enemyCount <= 0) {
 			ImageLoader.level = ImageLoader.level + 1;
-			Window.close();
-			new Game();
+			Game.imageLoader.loadLevel();
 		}
 
 		for(int i = 0; i < assetController.asset.size(); i++) {
@@ -142,14 +140,25 @@ public class Enemy extends Asset {
 					}
 				}
 			}
+			if (tempAsset.getID() == ID.Player) {
+				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+						Window.subtractPlayerHealth();
+						// Potential Knockback mechanic?? (Could be tough, allows enemies to "hit" the player through walls)
+						if (diffX < 0)
+							tempAsset.dX = 10;
+						else if (diffX > 0)
+							tempAsset.dX = -10;
+						if (diffY < 0)
+							tempAsset.dY = 10;
+						else if (diffY > 0)
+							tempAsset.dY = -10;
+				}
+
+			}
 		}
     }
 
     public void render(Graphics g) {
-        
-		//g.setColor(Color.red);
-		//g.fillRect(x, y, 32, 48);
-
 		g.drawImage(image, x, y, null);
     }
 

@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 
 /**
  * The Window class implements Java AWT and Java Swing to create a window
@@ -35,6 +36,7 @@ public class Window extends JFrame {
 	private static JComponent healthBar;
 	// private static JPanel endPanel;
 	private static JPanel hud;
+	
 
 	/**
 	 * This overloading constructor should always be called when creating a window
@@ -86,6 +88,8 @@ public class Window extends JFrame {
 		hud.setPreferredSize(new Dimension(width, 75));
 
 		frame.add(game, BorderLayout.CENTER);
+		frame.setCursor(new Cursor(1));
+		frame.add(game);
 		frame.add(hud, BorderLayout.NORTH);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,48 +97,48 @@ public class Window extends JFrame {
 		frame.setVisible(true);
 	}
 
-	public Window(int width, int height, String title) {
-		Font f = new Font("Courier", Font.BOLD, 75);
-		Font f2 = new Font("Courier", Font.PLAIN, 40);
-		fr = new JFrame(title);
-		JButton reset = new JButton("Play Again");
-		JPanel endPanel = new JPanel();
-		endPanel.setLayout(new BoxLayout(endPanel, BoxLayout.PAGE_AXIS));
-		reset.addActionListener(e -> resetGame());
-		reset.setFont(new Font("Courier", Font.PLAIN, 25));
-		gameOverLbl = new JLabel("Game Over", SwingConstants.CENTER);
-		endScoreLbl = new JLabel("Score: " + playerScore, SwingConstants.CENTER);
-		gameOverLbl.setFont(f);
-		endScoreLbl.setFont(f2);
+	// public Window(int width, int height, String title) {
+	// 	Font f = new Font("Courier", Font.BOLD, 75);
+	// 	Font f2 = new Font("Courier", Font.PLAIN, 40);
+	// 	fr = new JFrame(title);
+	// 	JButton reset = new JButton("Play Again");
+	// 	JPanel endPanel = new JPanel();
+	// 	endPanel.setLayout(new BoxLayout(endPanel, BoxLayout.PAGE_AXIS));
+	// 	reset.addActionListener(e -> resetGame());
+	// 	reset.setFont(new Font("Courier", Font.PLAIN, 25));
+	// 	gameOverLbl = new JLabel("Game Over", SwingConstants.CENTER);
+	// 	endScoreLbl = new JLabel("Score: " + playerScore, SwingConstants.CENTER);
+	// 	gameOverLbl.setFont(f);
+	// 	endScoreLbl.setFont(f2);
 
-		gameOverLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
-		endScoreLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
-		reset.setAlignmentX(Component.CENTER_ALIGNMENT);
+	// 	gameOverLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
+	// 	endScoreLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
+	// 	reset.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		endPanel.add(Box.createRigidArea(new Dimension(0, 250)));
-		endPanel.add(gameOverLbl);
-		endPanel.add(Box.createRigidArea(new Dimension(0, 150)));
-		endPanel.add(endScoreLbl);
-		endPanel.add(Box.createRigidArea(new Dimension(0, 50)));
-		endPanel.add(reset);
+	// 	endPanel.add(Box.createRigidArea(new Dimension(0, 250)));
+	// 	endPanel.add(gameOverLbl);
+	// 	endPanel.add(Box.createRigidArea(new Dimension(0, 150)));
+	// 	endPanel.add(endScoreLbl);
+	// 	endPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+	// 	endPanel.add(reset);
 		
-		fr.add(endPanel);
-		fr.setPreferredSize(new Dimension(width, height));
-		fr.setMinimumSize(new Dimension(width, height));
-		fr.setMaximumSize(new Dimension(width, height));
-		fr.setResizable(false);
-		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		fr.setLocationRelativeTo(null);
-		fr.setVisible(true);
-		close();
-	}
+	// 	fr.add(endPanel);
+	// 	fr.setPreferredSize(new Dimension(width, height));
+	// 	fr.setMinimumSize(new Dimension(width, height));
+	// 	fr.setMaximumSize(new Dimension(width, height));
+	// 	fr.setResizable(false);
+	// 	fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	// 	fr.setLocationRelativeTo(null);
+	// 	fr.setVisible(true);
+	// 	close();
+	// }
 
 	public static int getPlayerHealth() {
 		return playerHealth;
 	}
 
-	public static void setPlayerHealth() {
-		playerHealth = playerHealth - 25;
+	public static void subtractPlayerHealth() {
+		playerHealth -= 10;
 		healthBar.repaint();
 	}
 
@@ -164,5 +168,9 @@ public class Window extends JFrame {
 	public static void close() {
 		frame.dispose();
 	}
+
+  	public static void setPlayerHealth(int newHealth) {
+	   playerHealth = newHealth;
+   	}
 
 }

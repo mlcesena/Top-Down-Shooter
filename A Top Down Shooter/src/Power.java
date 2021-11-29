@@ -34,7 +34,7 @@ public class Power extends Asset{
      * used only once to keep power zone under player. (CHANGED)
 	 */
     public void render(Graphics g) {
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.GRAY);
         g.fillRect(x, y, 32, 32);
 	}
 

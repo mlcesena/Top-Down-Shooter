@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 public class Wall extends Asset {
 	//Initializing wall and updater
 	private static BufferedImage image;
-	private static int count = 0;
+	public static int count = 0;
 	
 
 	/**
@@ -24,12 +24,29 @@ public class Wall extends Asset {
 	 * @param y  - y position of the wall
 	 * @param id - ID value of the wall (ID.Wall)
 	 */
-	public Wall(int x, int y, ID id) {
+	public Wall(int x, int y, ID id, int level) {
 		super(x, y, id);
-		
+
 		if(count == 0) {
 			try {
-				image = ImageIO.read(getClass().getResource("/images/Test_Wall_Sprite.png"));
+				switch((level % 4)) {
+					case 0:
+						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite.png"));
+						break;
+					case 1:
+						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite_Green.png"));
+						break;
+					case 2:
+						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite_Blue.png"));
+						break;
+					case 3:
+						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite_Red.png"));
+						break;
+					default:
+						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite_Red.png"));
+						break;
+				}
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

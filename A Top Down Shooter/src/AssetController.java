@@ -52,6 +52,14 @@ public class AssetController {
 	}
 
 	/**
+	 * newAssetList is a method that should be called to get rid of all assets that are
+	 * in the game.
+	 */
+	public void newAssetList() {
+		asset = new ArrayList<Asset>();
+	}
+
+	/**
 	 * These are all getters and setters for movement controls
 	 */
 	public boolean isUp() {
@@ -92,6 +100,10 @@ public class AssetController {
 
 	public void setSprint(boolean sprint) {
 		this.sprint = sprint;
+	}
+
+	public void setAllFalse() {
+		up = false; down = false; left = false; right = false; sprint = false;
 	}
 
 }

@@ -52,17 +52,28 @@ public class KeyInput implements KeyListener {
 					if (Window.getPlayerAmmo() == 0)
 						Window.reload();
 					break;
+				// case KeyEvent.VK_SPACE:
+				// 	if (Window.getPlayerAmmo() > 0)
+				// 		Window.setPlayerAmmo();;
+				// 	break;
+
+				// 	ImageLoader.level = 0;
+				// 	Window.playerScore = 0;
+				// 	Game.imageLoader.loadLevel();
+				// 	break;
 				case KeyEvent.VK_SPACE:
-					if (Window.getPlayerAmmo() > 0)
-						Window.setPlayerAmmo();;
+					if(ImageLoader.level == 0) {
+						ImageLoader.level = ImageLoader.level + 1;
+						Game.imageLoader.loadLevel();
+					}
 					break;
+				//Testing Keys
 				case KeyEvent.VK_0:
-					Window.setPlayerHealth();
+					Window.subtractPlayerHealth();
 					break;
 				case KeyEvent.VK_9:
 					//Currently changes levels.
-					ImageLoader.zombieCount = 0;
-					Window.level++;
+					ImageLoader.enemyCount = 0;
 					break;
 				}
 			}

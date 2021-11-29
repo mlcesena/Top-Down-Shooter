@@ -19,6 +19,7 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private AssetController assetController;
 	private Camera camera;
+	public static ImageLoader imageLoader;
 	
 	/**
 	 * Default Game constructor. When this is called, a new window is created, the
@@ -33,7 +34,7 @@ public class Game extends Canvas implements Runnable {
 		camera = new Camera(0, 0);
 		this.addKeyListener(new KeyInput(assetController));
 
-		ImageLoader imageLoader = new ImageLoader(assetController);
+		imageLoader = new ImageLoader(assetController);
 		imageLoader.loadLevel();
 
 	}
@@ -50,16 +51,16 @@ public class Game extends Canvas implements Runnable {
 	/**
 	 *  Pause the game.
 	 */
-	private void pause() {
-		gameRunning = false;
-	}
+	// private void pause() {
+	// 	gameRunning = false;
+	// }
 	
 	/**
 	 *  Resumes the game.
 	 */
-	private void resume() {
-		gameRunning = true;
-	}
+	// private void resume() {
+	// 	gameRunning = true;
+	// }
 
 	/**
 	 * Stops the game, waits for the thread to stop
@@ -98,10 +99,9 @@ public class Game extends Canvas implements Runnable {
 				timeChange--;
 			}
 			render();
-			if (Window.getPlayerHealth() == 0) {
-				new Window(1650, 1000, "Top Down Shooter");
-				pause();
-			}
+			// if (Window.getPlayerHealth() == 0) {
+			// 	new Window(1650, 1000, "Top Down Shooter");
+			// }
 				
 		}
 		stop();
@@ -141,7 +141,7 @@ public class Game extends Canvas implements Runnable {
 		/* \/ DRAW HERE \/ */
 		/* ========================================== */
 
-		g.setColor(Color.ORANGE);
+		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, 0, 1900, 1000);
 
 		g2d.translate(-camera.getX(), -camera.getY());

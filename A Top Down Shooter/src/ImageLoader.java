@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
  */
 public class ImageLoader {
 	//Changable level to implament stage changes (WIP).
-	public static int level = 1;
-	public static int zombieCount;
+	public static int enemyCount;
+	public static int level = 0;
 	AssetController assetController;
 
 	/**
@@ -57,7 +57,14 @@ public class ImageLoader {
 		mapColorKey = readImage("/images/map_key.png");
 		
 		//Checks what level to take the map of (WIP).
+		newLevel();
 		switch(level) {
+			case 0:
+				level_test = readImage("/images/Title_Placeholder.png");
+				break;
+			case 999:
+				level_test = readImage("/images/Game_Over.png");
+				break;
 			case 1:
 				level_test = readImage("/images/level_test.png");
 				break;
@@ -79,23 +86,27 @@ public class ImageLoader {
 		int enemyPixel = getRGB(2, 0, mapColorKey);
 		int powerPixel = getRGB(3, 0, mapColorKey);
 		
-		for (int imageX = 0; imageX < w; imageX++) {
-			for (int imageY = 0; imageY < h; imageY++) {
-				int pixel = getRGB(imageX, imageY, level_test);
-				
-				if (pixel == wallPixel)
-					assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall));
-				else if (pixel == playerPixel) {
-					playerPixelX = imageX;
-					playerPixelY = imageY;
-				} else if (pixel == enemyPixel) {
-					assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
-					zombieCount++;
+		//rendering power -> wall -> enemy -> player
+		for(int i = 0; i < 4; i++) {
+			for (int imageX = 0; imageX < w; imageX++) {
+				for (int imageY = 0; imageY < h; imageY++) {
+					int pixel = getRGB(imageX, imageY, level_test);
+					
+					if (pixel == wallPixel & i == 1)
+						assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
+					else if (pixel == playerPixel & i == 3) {
+						playerPixelX = imageX;
+						playerPixelY = imageY;
+					} else if (pixel == enemyPixel & i == 2) {
+						assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
+						enemyCount++;
+					}
+					else if (pixel == powerPixel & i == 0)
+						assetController.addAsset(new Power(imageX * 32, imageY * 32, ID.Power));
+					
 				}
-				else if (pixel == powerPixel)
-					assetController.addAsset(new Power(imageX * 32, imageY * 32, ID.Power));
-				
 			}
+
 		}
 		assetController.addAsset(new Player(playerPixelX * 32, playerPixelY * 32, ID.Player, assetController));
 	}
@@ -116,6 +127,23 @@ public class ImageLoader {
 			e.printStackTrace();
 		}
 		return image;
+	}
+
+	/**
+	 * newLevel is a method that should be called each time a new level is loaded.
+	 * Resets variables and removes all current assets.
+	 */
+	public void newLevel() {
+		for (int i = 0; i < assetController.asset.size(); i++) {
+			Asset tempAsset = assetController.asset.get(i);
+			assetController.removeAsset(tempAsset);
+		}
+		Window.setPlayerHealth(200);
+		//Window.healthBar.repaint();
+		Window.level++;
+		Wall.count = 0;
+		assetController.setAllFalse();
+		assetController.newAssetList();
 	}
 
 }
