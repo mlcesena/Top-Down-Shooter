@@ -159,7 +159,6 @@ public class Window extends JFrame {
 		playerScore = 0;
 		level = 1;
 		Game.main(null);
-		
 	}
 
 	public static void close() {
