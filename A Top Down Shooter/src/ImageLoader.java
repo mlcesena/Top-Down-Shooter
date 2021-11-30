@@ -1,5 +1,7 @@
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -51,7 +53,7 @@ public class ImageLoader {
 	 */
 	public void loadLevel() {
 
-		BufferedImage level_test = null;
+		BufferedImage mapLevel = null;
 		BufferedImage mapColorKey = null;
 
 		mapColorKey = readImage("/images/map_key.png");
@@ -60,25 +62,24 @@ public class ImageLoader {
 		newLevel();
 		switch(level) {
 			case 0:
-				level_test = readImage("/images/Title_Placeholder.png");
+				mapLevel = readImage("/images/TempTitle.png");
 				break;
 			case 999:
-				level_test = readImage("/images/Game_Over.png");
-				break;
-			case 1:
-				level_test = readImage("/images/level_test.png");
-				break;
-			case 2:
-				level_test = readImage("/images/level_test_1.png");
+				mapLevel = readImage("/images/Game_Over.png");
 				break;
 			default:
-				level_test = readImage("/images/level_test_2.png");
-				break;
+				Random randGen = new Random();
+				int mapChooser = randGen.nextInt(3) + 1;
+				switch(mapChooser){
+					case 1: mapLevel = readImage("/images/level1.png"); break;
+					case 2: mapLevel = readImage("/images/level2.png"); break;
+					case 3: mapLevel = readImage("/images/level3.png"); break;
+				}
 		}
 		
 
-		int h = level_test.getHeight();
-		int w = level_test.getWidth();
+		int h = mapLevel.getHeight();
+		int w = mapLevel.getWidth();
 		int playerPixelX = 0;
 		int playerPixelY = 0;
 		int wallPixel = getRGB(0, 0, mapColorKey);
@@ -90,7 +91,7 @@ public class ImageLoader {
 		for(int i = 0; i < 4; i++) {
 			for (int imageX = 0; imageX < w; imageX++) {
 				for (int imageY = 0; imageY < h; imageY++) {
-					int pixel = getRGB(imageX, imageY, level_test);
+					int pixel = getRGB(imageX, imageY, mapLevel);
 					
 					if (pixel == wallPixel & i == 1)
 						assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
@@ -102,7 +103,7 @@ public class ImageLoader {
 						enemyCount++;
 					}
 					else if (pixel == powerPixel & i == 0)
-						assetController.addAsset(new Power(imageX * 32, imageY * 32, ID.Power));
+						assetController.addAsset(new SpeedUp(imageX * 32, imageY * 32, ID.Power));
 					
 				}
 			}

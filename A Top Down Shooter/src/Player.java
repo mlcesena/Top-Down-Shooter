@@ -1,6 +1,8 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.util.Timer;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
@@ -130,20 +132,30 @@ public class Player extends Asset {
 			} else if (tempAsset.getID() == ID.Power) {
 				if (hitBox().intersects(tempAsset.hitBox())) {
 
-					if (dX > 0) {
-						dX = 12;
-					} else if (dX < 0) {
-						dX = -12;
-					}
+					assetController.setSprint(true);
+					assetController.removeAsset(tempAsset);
+					
+					Timer t = new java.util.Timer();
+					t.schedule(new java.util.TimerTask() {
+						public void run() {
+							assetController.setSprint(false);
+							t.cancel();
+						}
+					}, 3000);
 
 				}
 				if (hitBox2().intersects(tempAsset.hitBox())) {
 
-					if (dY > 0) {
-						dY = 12;
-					} else if (dY < 0) {
-						dY = -12;
-					}
+					assetController.setSprint(true);
+					assetController.removeAsset(tempAsset);
+					
+					Timer t = new java.util.Timer();
+					t.schedule(new java.util.TimerTask() {
+						public void run() {
+							assetController.setSprint(false);
+							t.cancel();
+						}
+					}, 3000);
 
 				}
 			}

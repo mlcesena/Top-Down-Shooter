@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.util.Random;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
@@ -29,7 +31,9 @@ public class Wall extends Asset {
 
 		if(count == 0) {
 			try {
-				switch((level % 4)) {
+				Random randGen = new Random();
+				int mapChooser = randGen.nextInt(4) + 1;
+				switch(mapChooser){
 					case 0:
 						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite.png"));
 						break;
@@ -42,11 +46,7 @@ public class Wall extends Asset {
 					case 3:
 						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite_Red.png"));
 						break;
-					default:
-						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite_Red.png"));
-						break;
 				}
-				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

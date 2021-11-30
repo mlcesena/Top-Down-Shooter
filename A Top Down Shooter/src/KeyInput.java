@@ -46,8 +46,6 @@ public class KeyInput implements KeyListener {
 					assetController.setLeft(true);
 					break;
 				case KeyEvent.VK_SHIFT:
-					assetController.setSprint(true);
-					break;
 				// case KeyEvent.VK_R:
 				// 	ImageLoader.level = 0;
 				// 	Window.playerScore = 0;
@@ -103,9 +101,6 @@ public class KeyInput implements KeyListener {
 					break;
 				case KeyEvent.VK_A:
 					assetController.setLeft(false);
-					break;
-				case KeyEvent.VK_SHIFT:
-					assetController.setSprint(false);
 					break;
 				}
 			}
