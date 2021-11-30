@@ -145,6 +145,7 @@ public class Game extends Canvas implements Runnable {
 		assetController.render(g);
 
 		g2d.translate(camera.getX(), camera.getY());
+		//Change for Michael
 
 		/* ========================================== */
 		/* ^ DRAW HERE ^ */
