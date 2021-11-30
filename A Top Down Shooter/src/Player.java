@@ -16,6 +16,8 @@ import java.awt.image.BufferedImage;
 public class Player extends Asset {
 	//Initializing player character and updater
 	private BufferedImage image;
+	private static int invincibilityTime = 0;
+	private static boolean canTakeDmg = true;
 
 	AssetController assetController;
 
@@ -88,6 +90,7 @@ public class Player extends Asset {
 		}
 
 		Collision();
+		invincibilityTime++;
 
 	}
 
@@ -103,6 +106,7 @@ public class Player extends Asset {
 	 * it will not allow it to move any further in that direction
 	 */
 	private void Collision() {
+
 		for (int i = 0; i < assetController.asset.size(); i++) {
 			Asset tempAsset = assetController.asset.get(i);
 			if (tempAsset.getID() == ID.Wall) {
@@ -130,21 +134,7 @@ public class Player extends Asset {
 				}
 			//Collision with speed powerup
 			} else if (tempAsset.getID() == ID.Power) {
-				if (hitBox().intersects(tempAsset.hitBox())) {
-
-					assetController.setSprint(true);
-					assetController.removeAsset(tempAsset);
-					
-					Timer t = new java.util.Timer();
-					t.schedule(new java.util.TimerTask() {
-						public void run() {
-							assetController.setSprint(false);
-							t.cancel();
-						}
-					}, 3000);
-
-				}
-				if (hitBox2().intersects(tempAsset.hitBox())) {
+				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
 
 					assetController.setSprint(true);
 					assetController.removeAsset(tempAsset);
@@ -204,6 +194,21 @@ public class Player extends Asset {
 		double boxH = 48 + dY / 2;
 
 		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
+	}
+
+	public static int getInvincibilityTime() {
+		return invincibilityTime;
+	}
+
+	public static void setInvincibilityTime(int time) {
+		invincibilityTime = time;
+	}
+
+	public static boolean canTakeDmg() {
+		return canTakeDmg;
+	}
+	public static void canTakeDmg(boolean state) {
+		canTakeDmg = state;
 	}
 
 }

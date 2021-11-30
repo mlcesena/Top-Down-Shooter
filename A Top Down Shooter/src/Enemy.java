@@ -141,17 +141,27 @@ public class Enemy extends Asset {
 				}
 			}
 			if (tempAsset.getID() == ID.Player) {
+				// if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+				// 		Window.subtractPlayerHealth();
+				// 		// Potential Knockback mechanic?? (Could be tough, allows enemies to "hit" the player through walls)
+				// 		if (diffX < 0)
+				// 			tempAsset.dX = 10;
+				// 		else if (diffX > 0)
+				// 			tempAsset.dX = -10;
+				// 		if (diffY < 0)
+				// 			tempAsset.dY = 10;
+				// 		else if (diffY > 0)
+				// 			tempAsset.dY = -10;
+				// }
 				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+					if(Player.canTakeDmg()) {
 						Window.subtractPlayerHealth();
-						// Potential Knockback mechanic?? (Could be tough, allows enemies to "hit" the player through walls)
-						if (diffX < 0)
-							tempAsset.dX = 10;
-						else if (diffX > 0)
-							tempAsset.dX = -10;
-						if (diffY < 0)
-							tempAsset.dY = 10;
-						else if (diffY > 0)
-							tempAsset.dY = -10;
+						Player.canTakeDmg(false);
+					}
+					if(Player.getInvincibilityTime() >= 60) {
+						Player.canTakeDmg(true);
+						Player.setInvincibilityTime(0);
+					}
 				}
 
 			}
