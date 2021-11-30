@@ -86,23 +86,27 @@ public class ImageLoader {
 		int enemyPixel = getRGB(2, 0, mapColorKey);
 		int powerPixel = getRGB(3, 0, mapColorKey);
 		
-		for (int imageX = 0; imageX < w; imageX++) {
-			for (int imageY = 0; imageY < h; imageY++) {
-				int pixel = getRGB(imageX, imageY, level_test);
-				
-				if (pixel == wallPixel)
-					assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
-				else if (pixel == playerPixel) {
-					playerPixelX = imageX;
-					playerPixelY = imageY;
-				} else if (pixel == enemyPixel) {
-					assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
-					enemyCount++;
+		//rendering power -> wall -> enemy -> player
+		for(int i = 0; i < 4; i++) {
+			for (int imageX = 0; imageX < w; imageX++) {
+				for (int imageY = 0; imageY < h; imageY++) {
+					int pixel = getRGB(imageX, imageY, level_test);
+					
+					if (pixel == wallPixel & i == 1)
+						assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
+					else if (pixel == playerPixel & i == 3) {
+						playerPixelX = imageX;
+						playerPixelY = imageY;
+					} else if (pixel == enemyPixel & i == 2) {
+						assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
+						enemyCount++;
+					}
+					else if (pixel == powerPixel & i == 0)
+						assetController.addAsset(new Power(imageX * 32, imageY * 32, ID.Power));
+					
 				}
-				else if (pixel == powerPixel)
-					assetController.addAsset(new Power(imageX * 32, imageY * 32, ID.Power));
-				
 			}
+
 		}
 		assetController.addAsset(new Player(playerPixelX * 32, playerPixelY * 32, ID.Player, assetController));
 	}
@@ -134,8 +138,8 @@ public class ImageLoader {
 			Asset tempAsset = assetController.asset.get(i);
 			assetController.removeAsset(tempAsset);
 		}
-		Window.setPlayerHealth(250);
-		Window.healthBar.repaint();
+		Window.setPlayerHealth(200);
+		//Window.healthBar.repaint();
 		Window.level++;
 		Wall.count = 0;
 		assetController.setAllFalse();

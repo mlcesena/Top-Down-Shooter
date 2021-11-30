@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 
 public class Power extends Asset{
     //variable to keep the zone underneith the player
-    public int count = 0;
+
 
     /**
 	 * Overloading constructor to create an object of the Power class

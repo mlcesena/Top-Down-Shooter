@@ -43,7 +43,7 @@ public class Player extends Asset {
 	 * assetController's booleans, which are updated in the KeyInput class.
 	 */
 	public void update() {
-		isPlayerDead();
+		//isPlayerDead();
 		
 		x += dX;
 		y += dY;
@@ -89,12 +89,12 @@ public class Player extends Asset {
 
 	}
 
-	private void isPlayerDead() {
-		if(Window.getPlayerHealth() <= 0) {
-			ImageLoader.level = 999;
-			Game.imageLoader.loadLevel();
-		}
-	}
+	// private void isPlayerDead() {
+	// 	if(Window.getPlayerHealth() <= 0) {
+	// 		ImageLoader.level = 999;
+	// 		Game.imageLoader.loadLevel();
+	// 	}
+	// }
 
 	/**
 	 * Collision system in the game. If an object's hitBox touches a Wall's hitBox,
@@ -147,7 +147,6 @@ public class Player extends Asset {
 
 				}
 			}
-			
 			
 			//Areas for other collisions
 

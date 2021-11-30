@@ -138,7 +138,6 @@ public class Enemy extends Asset {
 						dY = 0;
 						y = tempAsset.getY() + 33;
 					}
-
 				}
 			}
 			if (tempAsset.getID() == ID.Player) {
@@ -189,6 +188,9 @@ public class Enemy extends Asset {
 
 		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
 	}
-    
+
+	public double getDistance() {
+		return distance;
+	}
 }
 
