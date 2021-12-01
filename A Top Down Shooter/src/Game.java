@@ -1,9 +1,14 @@
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
-//FIXME
+/**
+ * Game class is the main class for our game! It is the file you need to run for the game to work.
+ * 
+ * @authors Tyler Battershell and Michael Cesena
+ */
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
@@ -13,21 +18,26 @@ public class Game extends Canvas implements Runnable {
 	private boolean gameRunning = false;
 	private Thread thread;
 	private AssetController assetController;
-
+	private Camera camera;
+	public static ImageLoader imageLoader;
+	
 	/**
 	 * Default Game constructor. When this is called, a new window is created, the
 	 * game is started, the appropriate variables are declared, and the level is
 	 * loaded.
 	 */
 	public Game() {
-		new Window(1900, 1000, "Top Down Shooter", this);
+		new Window(1650, 1000, "Top Down Shooter", this);
 		start();
 
 		assetController = new AssetController();
+		camera = new Camera(0, 0);
 		this.addKeyListener(new KeyInput(assetController));
 
-		ImageLoader imageLoader = new ImageLoader(assetController);
+		imageLoader = new ImageLoader(assetController);
 		imageLoader.loadLevel();
+
+
 
 	}
 
@@ -43,16 +53,16 @@ public class Game extends Canvas implements Runnable {
 	/**
 	 *  Pause the game.
 	 */
-	private void pause() {
-		gameRunning = false;
-	}
+	// private void pause() {
+	// 	gameRunning = false;
+	// }
 	
 	/**
 	 *  Resumes the game.
 	 */
-	private void resume() {
-		gameRunning = true;
-	}
+	// private void resume() {
+	// 	gameRunning = true;
+	// }
 
 	/**
 	 * Stops the game, waits for the thread to stop
@@ -91,14 +101,26 @@ public class Game extends Canvas implements Runnable {
 				timeChange--;
 			}
 			render();
+			if (Window.getPlayerHealth() == 0) {
+				Window.setPlayerHealth(200);
+				new Window(1650, 1000, "Top Down Shooter");
+			}
+				
 		}
 		stop();
 	}
 
 	/**
 	 * update method updates every object in the game using the assetController
+	 * Also updates the camera position if there is a player asset
 	 */
 	public void update() {
+
+		for(int i = 0; i < assetController.asset.size(); i++) {
+			if(assetController.asset.get(i).getID() == ID.Player)
+				camera.update(assetController.asset.get(i));
+		}
+		
 		assetController.update();
 	}
 
@@ -106,7 +128,8 @@ public class Game extends Canvas implements Runnable {
 	 * render method renders every object in the game using a Buffer Strategy to
 	 * help in the process. The BufferStrategy(3) means it will load the next two
 	 * frames while it is still on the current one. Disposes of prior used graphics
-	 * and makes the next frame available
+	 * and makes the next frame available. Makes use of Graphics2D to translate the
+	 * assets for camera to work properly.
 	 */
 	public void render() {
 		BufferStrategy buffer = this.getBufferStrategy();
@@ -116,14 +139,19 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		Graphics g = buffer.getDrawGraphics();
+		Graphics2D g2d = (Graphics2D) g;
 		/* ========================================== */
 		/* \/ DRAW HERE \/ */
 		/* ========================================== */
 
-		g.setColor(Color.ORANGE);
+		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, 0, 1900, 1000);
 
+		g2d.translate(-camera.getX(), -camera.getY());
+
 		assetController.render(g);
+
+		g2d.translate(camera.getX(), camera.getY());
 
 		/* ========================================== */
 		/* ^ DRAW HERE ^ */
@@ -131,9 +159,12 @@ public class Game extends Canvas implements Runnable {
 
 		g.dispose();
 		buffer.show();
-
 	}
 
+	public static void setScore() {
+		Window.playerScore++;
+	}
+	
 	/**
 	 * The main game class. Simply creates a new Game when the program is ran.
 	 */

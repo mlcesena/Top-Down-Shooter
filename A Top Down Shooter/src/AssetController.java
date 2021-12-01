@@ -1,5 +1,5 @@
 import java.awt.Graphics;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * The AssetController class is one of the most important classes in the
@@ -11,7 +11,7 @@ import java.util.LinkedList;
  */
 public class AssetController {
 
-	LinkedList<Asset> asset = new LinkedList<Asset>();
+	public ArrayList<Asset> asset = new ArrayList<Asset>();
 	private boolean up = false, down = false, left = false, right = false, sprint = false;
 
 	/**
@@ -49,6 +49,14 @@ public class AssetController {
 	 */
 	public void removeAsset(Asset tempAsset) {
 		asset.remove(tempAsset);
+	}
+
+	/**
+	 * newAssetList is a method that should be called to get rid of all assets that are
+	 * in the game.
+	 */
+	public void newAssetList() {
+		asset = new ArrayList<Asset>();
 	}
 
 	/**
@@ -92,6 +100,10 @@ public class AssetController {
 
 	public void setSprint(boolean sprint) {
 		this.sprint = sprint;
+	}
+
+	public void setAllFalse() {
+		up = false; down = false; left = false; right = false; sprint = false;
 	}
 
 }

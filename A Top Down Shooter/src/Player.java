@@ -1,14 +1,23 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.io.IOException;
+import java.util.Timer;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 /**
- * Player class is the class created to add the player into the game. The pixel with
- * the corresponding player color will be turned into a 32x48 movable character.
+ * Player class is the class created to add the player into the game. The pixel
+ * with the corresponding player color will be turned into a 32x48 movable
+ * character.
  * 
  * @author Tyler Battershell
  */
 public class Player extends Asset {
+	//Initializing player character and updater
+	private BufferedImage image;
+	private static int invincibilityTime = 0;
+	private static boolean canTakeDmg = true;
 
 	AssetController assetController;
 
@@ -24,6 +33,13 @@ public class Player extends Asset {
 	public Player(int x, int y, ID id, AssetController assetController) {
 		super(x, y, id);
 		this.assetController = assetController;
+	
+		try {
+			image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -31,6 +47,8 @@ public class Player extends Asset {
 	 * assetController's booleans, which are updated in the KeyInput class.
 	 */
 	public void update() {
+		//isPlayerDead();
+		
 		x += dX;
 		y += dY;
 
@@ -44,13 +62,25 @@ public class Player extends Asset {
 		else if (!assetController.isUp())
 			dY = 0;
 
-		if (assetController.isLeft())
+		if (assetController.isLeft()) {
 			dX = -5;
+			try {
+				image = ImageIO.read(getClass().getResource("/images/Player_Sprite_Left.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		else if (!assetController.isRight())
 			dX = 0;
 
-		if (assetController.isRight())
+		if (assetController.isRight()) {
 			dX = 5;
+			try {
+				image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		else if (!assetController.isLeft())
 			dX = 0;
 
@@ -59,21 +89,126 @@ public class Player extends Asset {
 			dY *= 2;
 		}
 
+		Collision();
+		invincibilityTime++;
+
+	}
+
+	// private void isPlayerDead() {
+	// 	if(Window.getPlayerHealth() <= 0) {
+	// 		ImageLoader.level = 999;
+	// 		Game.imageLoader.loadLevel();
+	// 	}
+	// }
+
+	/**
+	 * Collision system in the game. If an object's hitBox touches a Wall's hitBox,
+	 * it will not allow it to move any further in that direction
+	 */
+	private void Collision() {
+
+		for (int i = 0; i < assetController.asset.size(); i++) {
+			Asset tempAsset = assetController.asset.get(i);
+			if (tempAsset.getID() == ID.Wall) {
+				if (hitBox().intersects(tempAsset.hitBox())) {
+
+					if (dX > 0) {
+						dX = 0;
+						x = tempAsset.getX() - 32;
+					} else if (dX < 0) {
+						dX = 0;
+						x = tempAsset.getX() + 32;
+					}
+
+				}
+				if (hitBox2().intersects(tempAsset.hitBox())) {
+
+					if (dY > 0) {
+						dY = 0;
+						y = tempAsset.getY() - 48;
+					} else if (dY < 0) {
+						dY = 0;
+						y = tempAsset.getY() + 32;
+					}
+
+				}
+			//Collision with speed powerup
+			} else if (tempAsset.getID() == ID.Power) {
+				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+
+					assetController.setSprint(true);
+					assetController.removeAsset(tempAsset);
+					
+					Timer t = new java.util.Timer();
+					t.schedule(new java.util.TimerTask() {
+						public void run() {
+							assetController.setSprint(false);
+							t.cancel();
+						}
+					}, 3000);
+
+				}
+			}
+			
+			//Areas for other collisions
+
+
+
+
+
+
+
+		}
 	}
 
 	/**
 	 * render method to render the player into the game.
 	 */
 	public void render(Graphics g) {
-		g.setColor(Color.cyan);
-		g.fillRect(x, y, 32, 48);
+		g.drawImage(image, x, y, null);
 	}
 
 	/**
-	 * hitBox method to return a rectangle with the player's hit box
+	 * hitBox method to return a rectangle with the player's hit box, used for
+	 * horizontal collision
 	 */
 	public Rectangle hitBox() {
-		return new Rectangle(x, y, 32, 48);
+
+		double boxX = x + dX;
+		double boxY = y;
+		double boxW = 32 + dX / 2;
+		double boxH = 48;
+
+		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
+	}
+
+	/**
+	 * hitBox method to return a rectangle with the player's hit box, used for
+	 * vertical collision
+	 */
+	public Rectangle hitBox2() {
+
+		double boxX = x;
+		double boxY = y + dY;
+		double boxW = 32;
+		double boxH = 48 + dY / 2;
+
+		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
+	}
+
+	public static int getInvincibilityTime() {
+		return invincibilityTime;
+	}
+
+	public static void setInvincibilityTime(int time) {
+		invincibilityTime = time;
+	}
+
+	public static boolean canTakeDmg() {
+		return canTakeDmg;
+	}
+	public static void canTakeDmg(boolean state) {
+		canTakeDmg = state;
 	}
 
 }

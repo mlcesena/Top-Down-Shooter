@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
  * KeyInput class is created to "listen" to the keyboard and receive inputs from
  * the user. Allows the user to control their character.
  * 
- * @author Tyler Battershell
+ * @authors Tyler Battershell, Michael Cesena, and Ethan Hubbell
  */
 public class KeyInput implements KeyListener {
 
@@ -46,7 +46,24 @@ public class KeyInput implements KeyListener {
 					assetController.setLeft(true);
 					break;
 				case KeyEvent.VK_SHIFT:
-					assetController.setSprint(true);
+					break;
+				case KeyEvent.VK_R:
+					if (Window.getPlayerAmmo() > 0)
+						Window.setPlayerAmmo();;
+					break;
+				case KeyEvent.VK_SPACE:
+					if(ImageLoader.level == 0) {
+						ImageLoader.level = ImageLoader.level + 1;
+						Game.imageLoader.loadLevel();
+					}
+					break;
+				//Testing Keys
+				case KeyEvent.VK_0:
+					Window.subtractPlayerHealth();
+					break;
+				case KeyEvent.VK_9:
+					//Currently changes levels.
+					ImageLoader.enemyCount = 0;
 					break;
 				}
 			}
@@ -76,9 +93,6 @@ public class KeyInput implements KeyListener {
 				case KeyEvent.VK_A:
 					assetController.setLeft(false);
 					break;
-				case KeyEvent.VK_SHIFT:
-					assetController.setSprint(false);
-					break;
 				}
 			}
 		}
@@ -89,4 +103,5 @@ public class KeyInput implements KeyListener {
 	 */
 	public void keyTyped(KeyEvent e) {
 	}
+
 }
