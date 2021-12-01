@@ -102,8 +102,8 @@ public class ImageLoader {
 						assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
 						enemyCount++;
 					}
-					else if (pixel == powerPixel & i == 0)
-						assetController.addAsset(new SpeedUp(imageX * 32, imageY * 32, ID.Power));
+					//else if (pixel == powerPixel & i == 0)
+					//	assetController.addAsset(new SpeedUp(imageX * 32, imageY * 32, ID.Power));
 					
 				}
 			}

@@ -206,6 +206,10 @@ public class Window extends JFrame {
 		Game.main(null);
 	}
 
+	public static void requestReload() { // If player tries to shoot with 0 bullets, replaces ammo counter with a reload notification
+		ammoLbl.setText("RELOAD!");
+	}
+
 	public static void close(JFrame gameFrame) { // deletes unused frames
 		gameFrame.dispose();
 	}

@@ -133,24 +133,27 @@ public class Player extends Asset {
 
 				}
 			//Collision with speed powerup
-			} else if (tempAsset.getID() == ID.Power) {
-				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+		//	} else if (tempAsset.getID() == ID.Power) {
+		//		if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
 
-					assetController.setSprint(true);
-					assetController.removeAsset(tempAsset);
-					
-					Timer t = new java.util.Timer();
-					t.schedule(new java.util.TimerTask() {
-						public void run() {
-							assetController.setSprint(false);
-							t.cancel();
-						}
-					}, 3000);
+//					assetController.setSprint(true);
+//					assetController.removeAsset(tempAsset);
+//					
+//					Timer t = new java.util.Timer();
+//					t.schedule(new java.util.TimerTask() {
+//						public void run() {
+//							assetController.setSprint(false);
+//							t.cancel();
+//						}
+//					}, 3000);
 
-				}
+//				}
 			}
 			
 			//Areas for other collisions
+
+
+
 
 
 
