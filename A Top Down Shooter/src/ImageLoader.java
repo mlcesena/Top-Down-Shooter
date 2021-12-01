@@ -141,7 +141,7 @@ public class ImageLoader {
 		}
 		Window.setPlayerHealth(200);
 		//Window.healthBar.repaint();
-		Window.level++;
+		level++;
 		Wall.count = 0;
 		assetController.setAllFalse();
 		assetController.newAssetList();

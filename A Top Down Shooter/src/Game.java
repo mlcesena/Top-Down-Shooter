@@ -7,7 +7,7 @@ import java.awt.image.BufferStrategy;
 /**
  * Game class is the main class for our game! It is the file you need to run for the game to work.
  * 
- * @author Tyler Battershell
+ * @authors Tyler Battershell and Michael Cesena
  */
 public class Game extends Canvas implements Runnable {
 
@@ -103,7 +103,7 @@ public class Game extends Canvas implements Runnable {
 			render();
 			if (Window.getPlayerHealth() == 0) {
 				Window.setPlayerHealth(200);
-				new Window(1600, 960, "Top Down Shooter");
+				new Window(1650, 1000, "Top Down Shooter");
 			}
 				
 		}
