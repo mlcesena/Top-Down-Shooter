@@ -52,23 +52,20 @@ public class KeyInput implements KeyListener {
 						//Window.setPlayerAmmo();;
 						Player.reload();
 					break;
-				// Current shoot ket is the SpaceBar
+				// Current shoot ket is the SpaceBar after main screen
 				case KeyEvent.VK_SPACE:
-				// Do not allow shooting when out of ammo
-				if(Player.getAmmoCount() == 0) {
-					Window.requestReload();
-					break;
-				}
-					else {
-					// Create a bullet object at the players position and reduce ammo by 1
-					assetController.addAsset(new Bullet(assetController.asset.get(i).getX(),assetController.asset.get(i).getY(), null, assetController));
-					Player.setAmmo();
-					break;
-				}
-				case KeyEvent.VK_F:
-					if(ImageLoader.level == 0) {
+					if(ImageLoader.level == 1) {
 						ImageLoader.level = ImageLoader.level + 1;
 						Game.imageLoader.loadLevel();
+					} else if(Player.getAmmoCount() == 0) {
+						Window.requestReload();
+						break;
+					}
+					else {
+						// Create a bullet object at the players position and reduce ammo by 1
+						assetController.addAsset(new Bullet(assetController.asset.get(i).getX(),assetController.asset.get(i).getY(), null, assetController));
+						Player.setAmmo();
+						break;
 					}
 					break;
 				//Testing Keys

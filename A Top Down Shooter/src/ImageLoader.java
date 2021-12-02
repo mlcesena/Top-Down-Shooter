@@ -61,7 +61,7 @@ public class ImageLoader {
 		//Checks what level to take the map of (WIP).
 		newLevel();
 		switch(level) {
-			case 0:
+			case 1:
 				mapLevel = readImage("/images/TempTitle.png");
 				break;
 			case 999:
