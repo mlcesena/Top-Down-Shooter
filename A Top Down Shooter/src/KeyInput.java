@@ -68,12 +68,14 @@ public class KeyInput implements KeyListener {
 						break;
 					}
 					break;
+
 				//Testing Keys
 				case KeyEvent.VK_0:
+					//Subtracts player health to test levels and enemies
 					Player.subtractHealth();
 					break;
 				case KeyEvent.VK_9:
-					//Currently changes levels.
+					//Currently changes levels by setting enemy count to 0.
 					ImageLoader.enemyCount = 0;
 					break;
 				}

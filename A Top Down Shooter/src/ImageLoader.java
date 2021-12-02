@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
  * ImageLoader class is created to load images from a .png file. This is used to
  * import the map key, maps, and sprites to the game.
  * 
- * @author Tyler Battershell
+ * @author Tyler Battershell / Ethan Hubbell
  */
 public class ImageLoader {
 	//Changable level to implament stage changes (WIP).
@@ -58,16 +58,19 @@ public class ImageLoader {
 
 		mapColorKey = readImage("/images/map_key.png");
 		
-		//Checks what level to take the map of (WIP).
+		//Checks what level to take the map of.
 		newLevel();
 		switch(level) {
 			case 1:
+				//Title always called first and only at begining of game
 				mapLevel = readImage("/images/TempTitle.png");
 				break;
 			case 999:
+				//End screen used to be called before new pop up was implemented.
 				mapLevel = readImage("/images/Game_Over.png");
 				break;
 			default:
+				//Randomly chooses the next level that will be displayed
 				Random randGen = new Random();
 				int mapChooser = randGen.nextInt(3) + 1;
 				switch(mapChooser){
@@ -87,7 +90,7 @@ public class ImageLoader {
 		int enemyPixel = getRGB(2, 0, mapColorKey);
 		int powerPixel = getRGB(3, 0, mapColorKey);
 		
-		//rendering power -> wall -> enemy -> player
+		//rendering power -> wall -> enemy -> player coords
 		for(int i = 0; i < 4; i++) {
 			for (int imageX = 0; imageX < w; imageX++) {
 				for (int imageY = 0; imageY < h; imageY++) {
@@ -109,6 +112,7 @@ public class ImageLoader {
 			}
 
 		}
+		//Creates player based on the coords given by level map.
 		assetController.addAsset(new Player(playerPixelX * 32, playerPixelY * 32, ID.Player, assetController));
 	}
 
@@ -135,15 +139,23 @@ public class ImageLoader {
 	 * Resets variables and removes all current assets.
 	 */
 	public void newLevel() {
+		//Removes assets to free computer space
 		for (int i = 0; i < assetController.asset.size(); i++) {
 			Asset tempAsset = assetController.asset.get(i);
 			assetController.removeAsset(tempAsset);
 		}
+		//Resets and updates player healthbar
 		Player.setHealth(200);
-		//Window.healthBar.repaint();
+		Window.updateHealthBar();
+		
+		//Adds level and resets wall count for new color
 		level++;
 		Wall.count = 0;
+
+		//sets player movement to false to avoid held key issue
 		assetController.setAllFalse();
+
+		//Creates new asset controller to delete past assets and collisions for them
 		assetController.newAssetList();
 	}
 

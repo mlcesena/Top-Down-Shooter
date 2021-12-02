@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * Wall class is the class created to add walls into the game. Each pixel with
  * the corresponding wall color will be turned into a 32x32 "wall"
  * 
- * @author Tyler Battershell
+ * @author Tyler Battershell / Ethan Hubbell
  */
 public class Wall extends Asset {
 	//Initializing wall and updater
@@ -67,7 +67,7 @@ public class Wall extends Asset {
 	public void render(Graphics g) {
 		g.drawImage(image, x, y, null);
 		
-		//Trying to make a drop shadow but Enemies apear under it
+		//Make a drop shadow appear under wall for depth of game.
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(x, y + 32, 32, 16);
 		
