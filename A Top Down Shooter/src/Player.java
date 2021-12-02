@@ -11,13 +11,16 @@ import java.awt.image.BufferedImage;
  * with the corresponding player color will be turned into a 32x48 movable
  * character.
  * 
- * @author Tyler Battershell
+ * @author Tyler Battershell and Michael Cesena
  */
 public class Player extends Asset {
 	//Initializing player character and updater
 	private BufferedImage image;
 	private static int invincibilityTime = 0;
 	private static boolean canTakeDmg = true;
+	private static int playerScore = 0;
+	private static int playerAmmo = 20;
+	private static int playerHealth = 200;
 
 	AssetController assetController;
 
@@ -33,7 +36,7 @@ public class Player extends Asset {
 	public Player(int x, int y, ID id, AssetController assetController) {
 		super(x, y, id);
 		this.assetController = assetController;
-	
+
 		try {
 			image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
 		} catch (IOException e) {
@@ -151,16 +154,6 @@ public class Player extends Asset {
 			}
 			
 			//Areas for other collisions
-
-
-
-
-
-
-
-
-
-
 		}
 	}
 
@@ -197,6 +190,47 @@ public class Player extends Asset {
 		double boxH = 48 + dY / 2;
 
 		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
+	}
+
+	public static int getScore() { // returns player score
+		return playerScore;
+	}
+
+	public void increaseScore() { // increases player score
+		playerScore++;
+	}
+
+	public static int getAmmoCount() { // returns ammo count
+		return playerAmmo;
+	}
+
+	public static void setAmmo() { // subtracts from ammo count
+		playerAmmo--;
+		Window.updateAmmo();
+	}
+
+	public static void reload() { // resets ammo count
+		playerAmmo = 20;
+		Window.updateAmmo();
+	}
+
+	public static int getHealth() { // returns player health
+		return playerHealth;
+	}
+
+	public static void setHealth(int health) { // sets player health to parameter value
+		playerHealth = health;
+	}
+
+	public static void subtractHealth() { // subtracts player health
+		playerHealth -= 20;
+		Window.updateHealthBar();
+	}
+
+	public static void reset() { // resets player variables
+		playerHealth = 200;
+		playerAmmo = 20;
+		playerScore = 0;
 	}
 
 	public static int getInvincibilityTime() {

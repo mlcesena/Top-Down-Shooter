@@ -38,9 +38,6 @@ public class Window extends JFrame {
 	private static JFrame fr;
 	
 	// HUD components and variables
-	protected static int playerScore;
-	protected static int playerAmmo = 20;
-	private static int playerHealth = 200;
 	private static JComponent healthBar;
 	private static JPanel hud;
 	
@@ -63,9 +60,9 @@ public class Window extends JFrame {
 		hud = new JPanel(new GridLayout(1, 4)); // instantiates hud JPanel with a GridLayout of 1x4
 
 		// instantiates all labels used in HUD
-		scoreLbl = new JLabel("Score: " + playerScore, SwingConstants.CENTER);
+		scoreLbl = new JLabel("Score: " + Player.getScore(), SwingConstants.CENTER);
 		healthLbl = new JLabel("Health: ", SwingConstants.CENTER);
-		ammoLbl = new JLabel("Ammo: " + playerAmmo, SwingConstants.CENTER);
+		ammoLbl = new JLabel("Ammo: " + Player.getAmmoCount(), SwingConstants.CENTER);
 		levelLbl = new JLabel("Level: " + ImageLoader.level, SwingConstants.CENTER);
 
 		// sets fonts of all HUD labels
@@ -81,7 +78,7 @@ public class Window extends JFrame {
 				g.setColor(Color.RED);
 				g.fillRect(0, healthPanel.getHeight() - 55, 200, 40);
 				g.setColor(Color.GREEN);
-				g.fillRect(0, healthPanel.getHeight() - 55, playerHealth, 40);
+				g.fillRect(0, healthPanel.getHeight() - 55, Player.getHealth(), 40);
 			};
 		};
 		healthPanel.add(healthBar);
@@ -132,7 +129,7 @@ public class Window extends JFrame {
 		JButton reset = new JButton("Play Again");
 		reset.addActionListener(e -> resetGame());
 		gameOverLbl = new JLabel("Game Over", SwingConstants.CENTER);
-		endScoreLbl = new JLabel("Score: " + playerScore, SwingConstants.CENTER);
+		endScoreLbl = new JLabel("Score: " + Player.getScore(), SwingConstants.CENTER);
 		
 		// sets fonts for labels and buttons
 		reset.setFont(new Font("Courier", Font.PLAIN, 25));
@@ -168,40 +165,18 @@ public class Window extends JFrame {
 		close(frame); // closes original game frame
 	}
 
-	public static int getPlayerHealth() { // returns player health
-		return playerHealth;
-	}
-
-	public static void setPlayerHealth(int newHealth) { // sets player health with parameter value
-		playerHealth = newHealth;
-	}
-
-	public static void subtractPlayerHealth() { // subtracts health and repaints health bar
-		playerHealth -= 20;
+	public static void updateHealthBar() {
 		healthBar.repaint();
 	}
 
-	public static int getPlayerAmmo() { // returns player ammo count
-		return playerAmmo;
-	}
-
-	public static void setPlayerAmmo() { // decreases player ammo and updates ammo label
-		playerAmmo--;
-		ammoLbl.setText("Ammo: " + playerAmmo);
-	}
-
-	public static void reload() { // restores the ammo value and updates ammo label
-		playerAmmo = 20;
-		ammoLbl.setText("Ammo: " + playerAmmo);
+	public static void updateAmmo() {
+		ammoLbl.setText("Ammo: " + Player.getAmmoCount());
 	}
 
 	public static void resetGame() { // used to reset game variables upon game over and starts new game
 		close(fr);
-		playerHealth = 200;
-		playerAmmo = 20;
-		playerScore = 0;
+		Player.reset();
 		ImageLoader.level = 0;
-		Window.playerScore = 0;
 		Game.imageLoader.loadLevel();
 		Game.main(null);
 	}

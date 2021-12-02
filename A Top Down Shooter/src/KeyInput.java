@@ -48,21 +48,21 @@ public class KeyInput implements KeyListener {
 				case KeyEvent.VK_SHIFT:
 					break;
 				case KeyEvent.VK_R:
-					if (Window.getPlayerAmmo() < 20)
+					if (Player.getAmmoCount() < 20)
 						//Window.setPlayerAmmo();;
-						Window.reload();
+						Player.reload();
 					break;
 				// Current shoot ket is the SpaceBar
 				case KeyEvent.VK_SPACE:
 				// Do not allow shooting when out of ammo
-				if(Window.getPlayerAmmo() == 0) {
+				if(Player.getAmmoCount() == 0) {
 					Window.requestReload();
 					break;
 				}
 					else {
 					// Create a bullet object at the players position and reduce ammo by 1
 					assetController.addAsset(new Bullet(assetController.asset.get(i).getX(),assetController.asset.get(i).getY(), null, assetController));
-					Window.setPlayerAmmo();
+					Player.setAmmo();
 					break;
 				}
 				case KeyEvent.VK_F:
@@ -73,7 +73,7 @@ public class KeyInput implements KeyListener {
 					break;
 				//Testing Keys
 				case KeyEvent.VK_0:
-					Window.subtractPlayerHealth();
+					Player.subtractHealth();
 					break;
 				case KeyEvent.VK_9:
 					//Currently changes levels.

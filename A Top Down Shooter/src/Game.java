@@ -36,9 +36,6 @@ public class Game extends Canvas implements Runnable {
 
 		imageLoader = new ImageLoader(assetController);
 		imageLoader.loadLevel();
-
-
-
 	}
 
 	/**
@@ -101,11 +98,10 @@ public class Game extends Canvas implements Runnable {
 				timeChange--;
 			}
 			render();
-			if (Window.getPlayerHealth() == 0) {
-				Window.setPlayerHealth(200);
+			if (Player.getHealth() == 0) {
+				Player.setHealth(200);
 				new Window(1650, 1000, "Top Down Shooter");
 			}
-				
 		}
 		stop();
 	}
@@ -160,10 +156,6 @@ public class Game extends Canvas implements Runnable {
 		g.dispose();
 		buffer.show();
 	}
-
-	public static void setScore() {
-		Window.playerScore++;
-	}
 	
 	/**
 	 * The main game class. Simply creates a new Game when the program is ran.
@@ -171,5 +163,4 @@ public class Game extends Canvas implements Runnable {
 	public static void main(String args[]) {
 		new Game();
 	}
-
 }

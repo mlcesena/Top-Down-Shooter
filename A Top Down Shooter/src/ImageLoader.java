@@ -139,7 +139,7 @@ public class ImageLoader {
 			Asset tempAsset = assetController.asset.get(i);
 			assetController.removeAsset(tempAsset);
 		}
-		Window.setPlayerHealth(200);
+		Player.setHealth(200);
 		//Window.healthBar.repaint();
 		level++;
 		Wall.count = 0;
