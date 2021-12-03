@@ -63,7 +63,7 @@ public class ImageLoader {
 		switch(level) {
 			case 1:
 				//Title always called first and only at begining of game
-				mapLevel = readImage("/images/TempTitle.png");
+				mapLevel = readImage("/images/Title.png");
 				break;
 			case 999:
 				//End screen used to be called before new pop up was implemented.
