@@ -37,7 +37,7 @@ public class Camera {
             y = 0;
         if (y >= 714)
             y = 714;
-        if(ImageLoader.level == 0) {
+        if(ImageLoader.level == 1) {
             x = 0;
             y = 0;
         }
