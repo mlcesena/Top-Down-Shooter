@@ -62,14 +62,12 @@ public class KeyInput implements KeyListener {
 				// Current shoot ket is the SpaceBar after main screen
 				case KeyEvent.VK_SPACE:
 					if(Player.getAmmoCount() == 0) {
-						Window.requestReload();
-						
+						Window.requestReload();	
 					}
 					else {
 						// Create a bullet object at the players position and reduce ammo by 1
 						assetController.addAsset(new Bullet(assetController.asset.get(i).getX(),assetController.asset.get(i).getY(), ID.Bullet, assetController));
-						Player.setAmmo();
-						
+						Player.setAmmo();	
 					}
 					break;
 

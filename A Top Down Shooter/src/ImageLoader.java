@@ -1,7 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
 
 /**
@@ -68,10 +67,12 @@ public class ImageLoader {
 				break;
 			case 999:
 				//End screen used to be called before new pop up was implemented.
+				newLevel();
 				mapLevel = readImage("/images/Game_Over.png");
 				break;
 			default:
 				//Randomly chooses the next level that will be displayed
+				newLevel();
 				Random randGen = new Random();
 				int mapChooser = randGen.nextInt(3) + 1;
 				switch(mapChooser){
@@ -157,9 +158,10 @@ public class ImageLoader {
 		Player.reload();
 		Window.updateHealthBar();
 		
-		//Adds level and resets wall count for new color
+		//Adds level and resets wall/floor count for new color
 		level++;
 		Wall.count = 0;
+		Floor.count = 0;
 
 		//sets player movement to false to avoid held key issue
 		assetController.setAllFalse();

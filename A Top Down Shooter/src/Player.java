@@ -2,7 +2,6 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.Timer;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 

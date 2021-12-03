@@ -3,11 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Random;
 
-import javax.imageio.ImageIO;
 
 /**
  * Game class is the main class for our game! It is the file you need to run for the game to work.
