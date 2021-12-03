@@ -64,12 +64,7 @@ public class Floor extends Asset {
 	 * render method to render the walls into the game.
 	 */
 	public void render(Graphics g) {
-        Floor.g = g;
-		for(xFloor = x; xFloor < x + 3200; xFloor += 32) {
-			for(yFloor = y; yFloor < y + 1600; yFloor += 32) {
-				g.drawImage(image, xFloor, yFloor, null);
-			}
-		}
+            g.drawImage(image, x, y, null);
 	}
 	
 	/**

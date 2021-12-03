@@ -93,7 +93,7 @@ public class ImageLoader {
 		int floorPixel = getRGB(4, 0, mapColorKey);
 		
 		//rendering power -> wall -> enemy -> player coords
-		for(int i = 1; i < 5; i++) {
+		for(int i = 0; i < 5; i++) {
 			for (int imageX = 0; imageX < w; imageX++) {
 				for (int imageY = 0; imageY < h; imageY++) {
 					int pixel = getRGB(imageX, imageY, mapLevel);
@@ -101,16 +101,20 @@ public class ImageLoader {
 					if (pixel == wallPixel & i == 2)
 						assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
 					else if (pixel == playerPixel & i == 4) {
+						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
 						playerPixelX = imageX;
 						playerPixelY = imageY;
 					} else if (pixel == enemyPixel & i == 3) {
+						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
 						assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
 						enemyCount++;
 					}
-					else if (pixel == powerPixel & i == 1)
+					else if (pixel == powerPixel & i == 1) {
+						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
 						assetController.addAsset(new SpeedUp(imageX * 32, imageY * 32, ID.SpeedUp));
-					//else if (pixel == floorPixel & i == 0 & floorCount == 0)
-					//	assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor)); floorCount++;
+					}
+					else if (pixel == floorPixel & i == 0)
+						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
 					
 				}
 			}

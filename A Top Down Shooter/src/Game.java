@@ -25,10 +25,7 @@ public class Game extends Canvas implements Runnable {
 	private AssetController assetController;
 	private Camera camera;
 	public static ImageLoader imageLoader;
-	private static BufferedImage imageF;
-	public static int countF = 0;
-	public static int xFloor = 0;
-	public static int yFloor = 0;	
+
 	
 	/**
 	 * Default Game constructor. When this is called, a new window is created, the
@@ -36,22 +33,6 @@ public class Game extends Canvas implements Runnable {
 	 * loaded.
 	 */
 	public Game() {
-		
-		try {
-			Random randGen1 = new Random();
-			int floor = randGen1.nextInt(2) + 1;
-			switch(floor){
-				case 0:
-					imageF = ImageIO.read(getClass().getResource("/images/Floor_Tile.png"));
-					break;
-				case 1:
-					imageF = ImageIO.read(getClass().getResource("/images/Floor_Tile_Tinted.png"));
-					break;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		new Window(1650, 1000, "Top Down Shooter", this);
 		start();
 
@@ -165,13 +146,8 @@ public class Game extends Canvas implements Runnable {
 		/* \/ DRAW HERE \/ */
 		/* ========================================== */
 
-		//g.setColor(Color.LIGHT_GRAY);
-		//g.fillRect(0, 0, 1900, 1000);
-		for(xFloor = 0; xFloor < 3200; xFloor += 32) {
-			for(yFloor = 0; yFloor < 1600; yFloor += 32) {
-				g.drawImage(imageF, xFloor, yFloor, null);
-			}
-		}
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(0, 0, 1900, 1000);
 
 		g2d.translate(-camera.getX(), -camera.getY());
 
