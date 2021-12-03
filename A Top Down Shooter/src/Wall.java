@@ -46,6 +46,9 @@ public class Wall extends Asset {
 					case 3:
 						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite_Red.png"));
 						break;
+					default:
+						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite_Red.png"));
+						break;
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
