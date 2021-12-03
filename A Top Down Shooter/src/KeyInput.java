@@ -52,22 +52,24 @@ public class KeyInput implements KeyListener {
 						//Window.setPlayerAmmo();;
 						Player.reload();
 					break;
-				// Current shoot ket is the SpaceBar after main screen
-				case KeyEvent.VK_SPACE:
+				case KeyEvent.VK_ENTER:
 					if(ImageLoader.level == 1) {
 						ImageLoader.enemyCount = 0;
 						ImageLoader.level = ImageLoader.level + 1;
 						Game.imageLoader.loadLevel();
 					} 
-					else if(Player.getAmmoCount() == 0) {
+					break;
+				// Current shoot ket is the SpaceBar after main screen
+				case KeyEvent.VK_SPACE:
+					if(Player.getAmmoCount() == 0) {
 						Window.requestReload();
-						break;
+						
 					}
 					else {
 						// Create a bullet object at the players position and reduce ammo by 1
 						assetController.addAsset(new Bullet(assetController.asset.get(i).getX(),assetController.asset.get(i).getY(), ID.Bullet, assetController));
 						Player.setAmmo();
-						break;
+						
 					}
 					break;
 
