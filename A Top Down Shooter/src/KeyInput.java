@@ -53,6 +53,10 @@ public class KeyInput implements KeyListener {
 						Player.reload();
 					break;
 				case KeyEvent.VK_ENTER:
+					if(ImageLoader.level == 0) {
+						ImageLoader.level = ImageLoader.level + 1;
+						Game.imageLoader.loadLevel();
+					}
 					break;
 				case KeyEvent.VK_SPACE:
 				// Do not allow shooting when out of ammo
@@ -67,17 +71,14 @@ public class KeyInput implements KeyListener {
 					break;
 				}
 				case KeyEvent.VK_F:
-					if(ImageLoader.level == 0) {
-						ImageLoader.level = ImageLoader.level + 1;
-						Game.imageLoader.loadLevel();
-					}
-					break;
+					
 				//Testing Keys
 				case KeyEvent.VK_0:
+					//Subtracts player health to test levels and enemies
 					Player.subtractHealth();
 					break;
 				case KeyEvent.VK_9:
-					//Currently changes levels.
+					//Currently changes levels by setting enemy count to 0.
 					ImageLoader.enemyCount = 0;
 					break;
 				}

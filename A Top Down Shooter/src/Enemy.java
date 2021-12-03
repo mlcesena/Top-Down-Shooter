@@ -39,7 +39,7 @@ public class Enemy extends Asset {
     }
 
     public void update() {
-		//Check if all enemies are gone.
+		//Check if all enemies are gone if so load the next level.
 		if(ImageLoader.enemyCount <= 0) {
 			ImageLoader.level = ImageLoader.level + 1;
 			Game.imageLoader.loadLevel();

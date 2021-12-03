@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * with the corresponding player color will be turned into a 32x48 movable
  * character.
  * 
- * @author Tyler Battershell and Michael Cesena
+ * @author Tyler Battershell / Michael Cesena / Ethan Hubbell
  */
 public class Player extends Asset {
 	//Initializing player character and updater
@@ -38,6 +38,7 @@ public class Player extends Asset {
 		super(x, y, id);
 		this.assetController = assetController;
 
+		//Loads original sprite to be updated on movement.
 		try {
 			image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
 		} catch (IOException e) {
@@ -69,6 +70,7 @@ public class Player extends Asset {
 		if (assetController.isLeft()) {
 			dX = -5;
 			dir = -1;
+			//Changes sprite orientation for directional movement
 			try {
 				image = ImageIO.read(getClass().getResource("/images/Player_Sprite_Left.png"));
 			} catch (IOException e) {
@@ -81,6 +83,7 @@ public class Player extends Asset {
 		if (assetController.isRight()) {
 			dX = 5;
 			dir = 1;
+			//Changes sprite orientation for directional movement
 			try {
 				image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
 			} catch (IOException e) {
@@ -115,6 +118,8 @@ public class Player extends Asset {
 
 		for (int i = 0; i < assetController.asset.size(); i++) {
 			Asset tempAsset = assetController.asset.get(i);
+
+			//If colliding with wall reset payer to before wall (prevents travel through walls)
 			if (tempAsset.getID() == ID.Wall) {
 				if (hitBox().intersects(tempAsset.hitBox())) {
 
@@ -161,7 +166,7 @@ public class Player extends Asset {
 	}
 
 	/**
-	 * render method to render the player into the game.
+	 * render method to render the player into the game and update its directional movement.
 	 */
 	public void render(Graphics g) {
 		g.drawImage(image, x, y, null);
