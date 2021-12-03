@@ -55,6 +55,7 @@ public class KeyInput implements KeyListener {
 				// Current shoot ket is the SpaceBar after main screen
 				case KeyEvent.VK_SPACE:
 					if(ImageLoader.level == 1) {
+						ImageLoader.enemyCount = 0;
 						ImageLoader.level = ImageLoader.level + 1;
 						Game.imageLoader.loadLevel();
 					} else if(Player.getAmmoCount() == 0) {

@@ -117,6 +117,7 @@ public class Bullet extends Asset {
             // Dealing with collision with an enemy 
             if (tempAsset.getID() == ID.Enemy) {
                 if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+                    ImageLoader.enemyCount--;
                     assetController.removeAsset(this);
                     assetController.removeAsset(tempAsset);
                     Player.increaseScore();

@@ -39,12 +39,6 @@ public class Enemy extends Asset {
     }
 
     public void update() {
-		//Check if all enemies are gone if so load the next level.
-		if(ImageLoader.enemyCount <= 0) {
-			ImageLoader.level = ImageLoader.level + 1;
-			Game.imageLoader.loadLevel();
-		}
-
 		for(int i = 0; i < assetController.asset.size(); i++) {
 			if(assetController.asset.get(i).getID() == ID.Player) {
 				diffX = x - assetController.asset.get(i).getX(); // calculates the difference between the enemy's x and the player's x

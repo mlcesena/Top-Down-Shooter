@@ -52,7 +52,11 @@ public class Player extends Asset {
 	 * assetController's booleans, which are updated in the KeyInput class.
 	 */
 	public void update() {
-		//isPlayerDead();
+		//Check if all enemies are gone if so load the next level.
+		if(ImageLoader.enemyCount <= 0) {
+			ImageLoader.level = ImageLoader.level + 1;
+			Game.imageLoader.loadLevel();
+		}
 		
 		x += dX;
 		y += dY;
