@@ -36,7 +36,7 @@ public class Floor extends Asset {
 		if(count == 0) {
 			try {
 				Random randGen = new Random();
-				int floor = randGen.nextInt(2) + 1;
+				int floor = randGen.nextInt(2);
 				switch(floor){
 					case 0:
 						image = ImageIO.read(getClass().getResource("/images/Floor_Tile.png"));
@@ -44,6 +44,9 @@ public class Floor extends Asset {
 					case 1:
 						image = ImageIO.read(getClass().getResource("/images/Floor_Tile_Tinted.png"));
 						break;
+                    default:
+                        image = ImageIO.read(getClass().getResource("/images/Floor_Tile_Tinted.png"));
+                        break;
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
