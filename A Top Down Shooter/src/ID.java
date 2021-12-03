@@ -8,7 +8,7 @@ import javax.swing.event.SwingPropertyChangeSupport;
  */
 public enum ID {
 
-	Player(), Wall(), Floor(), Bullet(), Enemy();
+	Player(), Wall(), Floor(), Bullet(), Enemy(), SpeedUp();
 
 	
 }

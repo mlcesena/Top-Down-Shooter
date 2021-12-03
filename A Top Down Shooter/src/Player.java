@@ -21,6 +21,7 @@ public class Player extends Asset {
 	private static int playerScore = 0;
 	private static int playerAmmo = 20;
 	private static int playerHealth = 200;
+	private static int dir = 1;
 
 	AssetController assetController;
 
@@ -67,6 +68,7 @@ public class Player extends Asset {
 
 		if (assetController.isLeft()) {
 			dX = -5;
+			dir = -1;
 			try {
 				image = ImageIO.read(getClass().getResource("/images/Player_Sprite_Left.png"));
 			} catch (IOException e) {
@@ -78,6 +80,7 @@ public class Player extends Asset {
 
 		if (assetController.isRight()) {
 			dX = 5;
+			dir = 1;
 			try {
 				image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
 			} catch (IOException e) {
@@ -136,21 +139,21 @@ public class Player extends Asset {
 
 				}
 			//Collision with speed powerup
-		//	} else if (tempAsset.getID() == ID.Power) {
-		//		if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+			} else if (tempAsset.getID() == ID.SpeedUp) {
+				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
 
-//					assetController.setSprint(true);
-//					assetController.removeAsset(tempAsset);
-//					
-//					Timer t = new java.util.Timer();
-//					t.schedule(new java.util.TimerTask() {
-//						public void run() {
-//							assetController.setSprint(false);
-//							t.cancel();
-//						}
-//					}, 3000);
+					assetController.setSprint(true);
+					assetController.removeAsset(tempAsset);
+					
+					Timer t = new java.util.Timer();
+					t.schedule(new java.util.TimerTask() {
+						public void run() {
+							assetController.setSprint(false);
+							t.cancel();
+						}
+					}, 3000);
 
-//				}
+				}
 			}
 			
 			//Areas for other collisions
@@ -196,8 +199,9 @@ public class Player extends Asset {
 		return playerScore;
 	}
 
-	public void increaseScore() { // increases player score
+	public static void increaseScore() { // increases player score
 		playerScore++;
+		Window.updateScore();
 	}
 
 	public static int getAmmoCount() { // returns ammo count
@@ -246,6 +250,10 @@ public class Player extends Asset {
 	}
 	public static void canTakeDmg(boolean state) {
 		canTakeDmg = state;
+	}
+
+	public static int getDirection() {
+		return dir;
 	}
 
 }

@@ -6,15 +6,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 
-
-
 /**
- * Bullet Class
- * This class will handle the shooting of the bullets
- * from the character
- * Bullets will be small images.
+ * The Bullet class is used to create new bullet objects, control their movement, collision, and other mechanics
+ * 
+ * @authors Michael Cesena and Matthew Arble
  */
-
 
 public class Bullet extends Asset {
 
@@ -38,13 +34,27 @@ public class Bullet extends Asset {
 		this.assetController = assetController;
 
         // Set image of bullet object to Bullet.png
-        try {
-            image = ImageIO.read(getClass().getResource("/images/Bullet.png"));
+        if (Player.getDirection() == 1) {
+            try {
+                image = ImageIO.read(getClass().getResource("/images/Bullet_Right.png"));
+            }
+            catch(IOException e) {
+                e.printStackTrace();
+                System.out.println("Bullet.java - Failed to set image of bullet to Bullet_Right.png");
+            }    
+            dX += 20;
         }
-        catch(IOException e) {
-            e.printStackTrace();
-            System.out.println("Bullet.java - Failed to set image of bullet to Bullet.png");
+        else if (Player.getDirection() == -1) {
+            try {
+                image = ImageIO.read(getClass().getResource("/images/Bullet_Left.png"));
+            }
+            catch(IOException e) {
+                e.printStackTrace();
+                System.out.println("Bullet.java - Failed to set image of bullet to Bullet_Left.png");
+            }
+            dX -= 20;
         }
+            
 	}
 
     // Renders a bullet
@@ -53,8 +63,6 @@ public class Bullet extends Asset {
     }
 
     public void update() {
-
-        dX += 1;
 
         x += dX;
 		y += dY;
@@ -101,26 +109,20 @@ public class Bullet extends Asset {
             Asset tempAsset = assetController.asset.get(i);
             // For  horizontal hit box collision with a wall
             if (tempAsset.getID() == ID.Wall) {
-				if (hitBox().intersects(tempAsset.hitBox())) {
-                    assetController.removeAsset(tempBullet);
-        }
-            // Vertical hit box of the bullet collision with wall
-            if (hitBox2().intersects(tempAsset.hitBox()))
-                assetController.removeAsset(tempBullet);
+				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+                    assetController.removeAsset(this);
+                }
+            }   
+
             // Dealing with collision with an enemy 
             if (tempAsset.getID() == ID.Enemy) {
-                if (hitBox().intersects(tempAsset.hitBox())) {
-                assetController.removeAsset(tempBullet);
-                assetController.removeAsset(tempAsset);
-                }
-
-                if (hitBox2().intersects(tempAsset.hitBox())) {
-                    assetController.removeAsset(tempBullet);
+                if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+                    assetController.removeAsset(this);
                     assetController.removeAsset(tempAsset);
+                    Player.increaseScore();
                 }
-                }
-    }   
-}
+            }
+        }       
     }
 }
 

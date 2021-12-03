@@ -24,7 +24,7 @@ import java.awt.Cursor;
  */
 public class Window extends JFrame {
 	// labels used in HUD
-	private JLabel scoreLbl;
+	private static JLabel scoreLbl;
 	private JLabel healthLbl;
 	private JLabel levelLbl;
 	private static JLabel ammoLbl;
@@ -173,9 +173,14 @@ public class Window extends JFrame {
 		ammoLbl.setText("Ammo: " + Player.getAmmoCount());
 	}
 
+	public static void updateScore() {
+		scoreLbl.setText("Score: " + Player.getScore());
+	}
+
 	public static void resetGame() { // used to reset game variables upon game over and starts new game
 		close(fr);
 		Player.reset();
+		//AssetController.asset.clear();
 		ImageLoader.level = 0;
 		Game.imageLoader.loadLevel();
 		Game.main(null);
