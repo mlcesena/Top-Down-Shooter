@@ -58,13 +58,14 @@ public class KeyInput implements KeyListener {
 						ImageLoader.enemyCount = 0;
 						ImageLoader.level = ImageLoader.level + 1;
 						Game.imageLoader.loadLevel();
-					} else if(Player.getAmmoCount() == 0) {
+					} 
+					else if(Player.getAmmoCount() == 0) {
 						Window.requestReload();
 						break;
 					}
 					else {
 						// Create a bullet object at the players position and reduce ammo by 1
-						assetController.addAsset(new Bullet(assetController.asset.get(i).getX(),assetController.asset.get(i).getY(), null, assetController));
+						assetController.addAsset(new Bullet(assetController.asset.get(i).getX(),assetController.asset.get(i).getY(), ID.Bullet, assetController));
 						Player.setAmmo();
 						break;
 					}

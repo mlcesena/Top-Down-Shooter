@@ -178,9 +178,10 @@ public class Window extends JFrame {
 	}
 
 	public static void resetGame() { // used to reset game variables upon game over and starts new game
+		AssetController ac = new AssetController();
+		ac.asset.clear();
 		close(fr);
 		Player.reset();
-		//AssetController.asset.clear();
 		ImageLoader.level = 0;
 		Game.imageLoader.loadLevel();
 		Game.main(null);
