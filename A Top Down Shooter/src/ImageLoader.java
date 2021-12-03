@@ -14,6 +14,7 @@ public class ImageLoader {
 	//Changable level to implament stage changes (WIP).
 	public static int enemyCount;
 	public static int level = 0;
+	public static int floorCount = 0;
 	AssetController assetController;
 
 	/**
@@ -89,24 +90,27 @@ public class ImageLoader {
 		int playerPixel = getRGB(1, 0, mapColorKey);
 		int enemyPixel = getRGB(2, 0, mapColorKey);
 		int powerPixel = getRGB(3, 0, mapColorKey);
+		int floorPixel = getRGB(4, 0, mapColorKey);
 		
 		//rendering power -> wall -> enemy -> player coords
-		for(int i = 0; i < 4; i++) {
+		for(int i = 1; i < 5; i++) {
 			for (int imageX = 0; imageX < w; imageX++) {
 				for (int imageY = 0; imageY < h; imageY++) {
 					int pixel = getRGB(imageX, imageY, mapLevel);
 					
-					if (pixel == wallPixel & i == 1)
+					if (pixel == wallPixel & i == 2)
 						assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
-					else if (pixel == playerPixel & i == 3) {
+					else if (pixel == playerPixel & i == 4) {
 						playerPixelX = imageX;
 						playerPixelY = imageY;
-					} else if (pixel == enemyPixel & i == 2) {
+					} else if (pixel == enemyPixel & i == 3) {
 						assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
 						enemyCount++;
 					}
-					else if (pixel == powerPixel & i == 0)
+					else if (pixel == powerPixel & i == 1)
 						assetController.addAsset(new SpeedUp(imageX * 32, imageY * 32, ID.SpeedUp));
+					//else if (pixel == floorPixel & i == 0 & floorCount == 0)
+					//	assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor)); floorCount++;
 					
 				}
 			}
