@@ -32,7 +32,7 @@ public class Wall extends Asset {
 		if(count == 0) {
 			try {
 				Random randGen = new Random();
-				int mapChooser = randGen.nextInt(4) + 1;
+				int mapChooser = randGen.nextInt(4);
 				switch(mapChooser){
 					case 0:
 						image = ImageIO.read(getClass().getResource("/images/Wall_Sprite.png"));
