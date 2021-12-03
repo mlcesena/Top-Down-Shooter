@@ -236,7 +236,7 @@ public class Player extends Asset {
 	}
 
 	public static void subtractHealth() { // subtracts player health
-		playerHealth -= 20;
+		playerHealth -= 40;
 		Window.updateHealthBar();
 	}
 

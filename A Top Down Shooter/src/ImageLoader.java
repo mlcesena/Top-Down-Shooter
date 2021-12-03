@@ -146,6 +146,7 @@ public class ImageLoader {
 		}
 		//Resets and updates player healthbar
 		Player.setHealth(200);
+		Player.reload();
 		Window.updateHealthBar();
 		
 		//Adds level and resets wall count for new color
