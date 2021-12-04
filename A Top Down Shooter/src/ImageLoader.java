@@ -72,11 +72,17 @@ public class ImageLoader {
 			default:
 				//Randomly chooses the next level that will be displayed
 				Random randGen = new Random();
-				int mapChooser = randGen.nextInt(3) + 1;
+				int mapChooser = randGen.nextInt(9) + 1;
 				switch(mapChooser){
-					case 1: mapLevel = readImage("/images/level1.png"); break;
-					case 2: mapLevel = readImage("/images/level2.png"); break;
-					case 3: mapLevel = readImage("/images/level3.png"); break;
+					case 1: mapLevel = readImage("/images/level1_1.png"); break;
+					case 2: mapLevel = readImage("/images/level2_1.png"); break;
+					case 3: mapLevel = readImage("/images/level3_1.png"); break;
+					case 4: mapLevel = readImage("/images/level1_2.png"); break;
+					case 5: mapLevel = readImage("/images/level2_2.png"); break;
+					case 6: mapLevel = readImage("/images/level3_2.png"); break;
+					case 7: mapLevel = readImage("/images/level1_3.png"); break;
+					case 8: mapLevel = readImage("/images/level2_3.png"); break;
+					case 9: mapLevel = readImage("/images/level3_3.png"); break;
 				}
 		}
 		
@@ -88,36 +94,40 @@ public class ImageLoader {
 		int wallPixel = getRGB(0, 0, mapColorKey);
 		int playerPixel = getRGB(1, 0, mapColorKey);
 		int enemyPixel = getRGB(2, 0, mapColorKey);
-		int powerPixel = getRGB(3, 0, mapColorKey);
+		int speedPixel = getRGB(3, 0, mapColorKey);
 		int floorPixel = getRGB(4, 0, mapColorKey);
+		int medKitPixel = getRGB(5, 0, mapColorKey);
 		
 		//rendering power -> wall -> enemy -> player coords
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < 6; i++) {
 			for (int imageX = 0; imageX < w; imageX++) {
 				for (int imageY = 0; imageY < h; imageY++) {
 					int pixel = getRGB(imageX, imageY, mapLevel);
 					
-					if (pixel == wallPixel & i == 2)
-						assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
-					else if (pixel == playerPixel & i == 4) {
+					if (pixel == floorPixel & i == 0)
 						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
-						playerPixelX = imageX;
-						playerPixelY = imageY;
-					} else if (pixel == enemyPixel & i == 3) {
+					else if (pixel == wallPixel & i == 1)
+						assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
+					else if (pixel == speedPixel & i == 2) {
+						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
+						assetController.addAsset(new SpeedUp(imageX * 32, imageY * 32, ID.SpeedUp));
+					}
+					else if (pixel == medKitPixel & i == 3) {
+						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
+						assetController.addAsset(new MedKit(imageX * 32, imageY * 32, ID.MedKit));
+					}
+					else if (pixel == enemyPixel & i == 4) {
 						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
 						assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
 						enemyCount++;
 					}
-					else if (pixel == powerPixel & i == 1) {
+					else if (pixel == playerPixel & i == 5) {
 						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
-						assetController.addAsset(new SpeedUp(imageX * 32, imageY * 32, ID.SpeedUp));
-					}
-					else if (pixel == floorPixel & i == 0)
-						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
-					
+						playerPixelX = imageX;
+						playerPixelY = imageY;
+					} 
 				}
 			}
-
 		}
 		//Creates player based on the coords given by level map.
 		assetController.addAsset(new Player(playerPixelX * 32, playerPixelY * 32, ID.Player, assetController));

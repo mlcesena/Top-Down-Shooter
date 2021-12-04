@@ -102,15 +102,10 @@ public class Player extends Asset {
 
 		Collision();
 		invincibilityTime++;
-
+		if(getInvincibilityTime() >= 60) {
+			canTakeDmg(true);
+		}
 	}
-
-	// private void isPlayerDead() {
-	// 	if(Window.getPlayerHealth() <= 0) {
-	// 		ImageLoader.level = 999;
-	// 		Game.imageLoader.loadLevel();
-	// 	}
-	// }
 
 	/**
 	 * Collision system in the game. If an object's hitBox touches a Wall's hitBox,
@@ -162,7 +157,15 @@ public class Player extends Asset {
 
 				}
 			}
-			
+			// Collision with Med Kit
+			else if (tempAsset.getID() == ID.MedKit) {
+				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
+					if (playerHealth <= 160) {
+						addHealth(40);
+						assetController.removeAsset(tempAsset);
+					}
+				}
+			}
 			//Areas for other collisions
 		}
 	}
@@ -221,7 +224,7 @@ public class Player extends Asset {
 	}
 
 	public static void reload() { // resets ammo count
-		playerAmmo = 20;
+		playerAmmo = 10;
 		Window.updateAmmo();
 	}
 
@@ -231,6 +234,12 @@ public class Player extends Asset {
 
 	public static void setHealth(int health) { // sets player health to parameter value
 		playerHealth = health;
+		Window.updateHealthBar();
+	}
+
+	public static void addHealth(int health) { // adds player health to parameter value
+		playerHealth += health;
+		Window.updateHealthBar();
 	}
 
 	public static void subtractHealth() { // subtracts player health
@@ -240,7 +249,7 @@ public class Player extends Asset {
 
 	public static void reset() { // resets player variables
 		playerHealth = 200;
-		playerAmmo = 20;
+		playerAmmo = 10;
 		playerScore = 0;
 	}
 

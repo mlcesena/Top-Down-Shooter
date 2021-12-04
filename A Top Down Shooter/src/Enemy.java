@@ -157,15 +157,11 @@ public class Enemy extends Asset {
 				// }
 				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
 					if(Player.canTakeDmg()) {
-						Player.subtractHealth();
 						Player.canTakeDmg(false);
-					}
-					if(Player.getInvincibilityTime() >= 60) {
-						Player.canTakeDmg(true);
+						Player.subtractHealth();
 						Player.setInvincibilityTime(0);
 					}
 				}
-
 			}
 		}
     }

@@ -14,11 +14,11 @@ public class SpeedUp extends Asset{
 	private BufferedImage image;
 
     /**
-	 * Overloading constructor to create an object of the Power class
+	 * Overloading constructor to create an object of the Speed Up class
 	 * 
-	 * @param x  - x position of the zone
-	 * @param y  - y position of the zone
-	 * @param id - ID value of the power zone (ID.Power)
+	 * @param x  - x position of the power up
+	 * @param y  - y position of the power up
+	 * @param id - ID value of the power up (ID.SpeedUp)
 	 */
     public SpeedUp(int x, int y, ID id) {
         super(x, y, id);
@@ -30,22 +30,23 @@ public class SpeedUp extends Asset{
     }
 
     /**
-	 * update method to update the powerups. There is no movement so there is no code.
+	 * update method to update the power ups. There is no movement so there is no code.
 	 */
     public void update() {
 	}
 
     /**
-	 * render method to render the powerup into the game
+	 * render method to render the power up into the game
 	 */
     public void render(Graphics g) {
         g.drawImage(image, x, y, null);
 	}
 
     /**
-	 * hitBox method to return a rectangle with a similar size to the powerup.
+	 * hitBox method to return a rectangle with a similar size to the power up.
 	 */
     public Rectangle hitBox() {
+		
 		return new Rectangle(x, y, 64, 64);
 	}
 

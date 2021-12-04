@@ -48,7 +48,7 @@ public class KeyInput implements KeyListener {
 				case KeyEvent.VK_SHIFT:
 					break;
 				case KeyEvent.VK_R:
-					if (Player.getAmmoCount() < 20)
+					if (Player.getAmmoCount() < 10)
 						//Window.setPlayerAmmo();;
 						Player.reload();
 					break;

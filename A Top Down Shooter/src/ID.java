@@ -6,7 +6,7 @@
  */
 public enum ID {
 
-	Player(), Wall(), Floor(), Bullet(), Enemy(), SpeedUp();
+	Player(), Wall(), Floor(), Bullet(), Enemy(), SpeedUp(), MedKit();
 
 	
 }
