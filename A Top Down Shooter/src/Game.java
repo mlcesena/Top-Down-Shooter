@@ -27,7 +27,7 @@ public class Game extends Canvas implements Runnable {
 	 * loaded.
 	 */
 	public Game() {
-		new Window(1650, 1000, "Top Down Shooter", this);
+		new Window(1650, 1000, "Call of 2D", this);
 		start();
 
 		assetController = new AssetController();
@@ -100,7 +100,7 @@ public class Game extends Canvas implements Runnable {
 			render();
 			if (Player.getHealth() == 0) {
 				Player.setHealth(200);
-				new Window(1650, 1000, "Top Down Shooter");
+				new Window(1650, 1000, "Call of 2D");
 				stop();
 			}
 		}
