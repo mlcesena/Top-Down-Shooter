@@ -251,6 +251,7 @@ public class Player extends Asset {
 		playerHealth = 200;
 		playerAmmo = 10;
 		playerScore = 0;
+		dir = 1;
 	}
 
 	public static int getInvincibilityTime() {

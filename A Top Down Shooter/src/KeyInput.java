@@ -49,7 +49,6 @@ public class KeyInput implements KeyListener {
 					break;
 				case KeyEvent.VK_R:
 					if (Player.getAmmoCount() < 10)
-						//Window.setPlayerAmmo();;
 						Player.reload();
 					break;
 				case KeyEvent.VK_ENTER:
@@ -71,14 +70,14 @@ public class KeyInput implements KeyListener {
 					break;
 
 				//Testing Keys
-				case KeyEvent.VK_0:
-					//Subtracts player health to test levels and enemies
-					Player.subtractHealth();
-					break;
-				case KeyEvent.VK_9:
-					//Currently changes levels by setting enemy count to 0.
-					ImageLoader.enemyCount = 0;
-					break;
+				// case KeyEvent.VK_0:
+				// 	//Subtracts player health to test levels and enemies
+				// 	Player.subtractHealth();
+				// 	break;
+				// case KeyEvent.VK_9:
+				// 	//Currently changes levels by setting enemy count to 0.
+				// 	ImageLoader.enemyCount = 0;
+				// 	break;
 				}
 			}
 		}

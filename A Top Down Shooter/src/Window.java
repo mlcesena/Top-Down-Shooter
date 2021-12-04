@@ -2,13 +2,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
@@ -116,14 +114,7 @@ public class Window extends JFrame {
 		Font f2 = new Font("Courier", Font.PLAIN, 40);
 		
 		fr = new JFrame(title);
-		JPanel endPanel = new JPanel() {
-			public void paintComponent(Graphics g) {
-				ImageIcon img = new ImageIcon("/images/Game_Over.png");
-				Image i = img.getImage();
-
-				g.drawImage(i, 0, 0, this.getSize().width, this.getSize().height, this);
-			}
-		};
+		JPanel endPanel = new JPanel();
 		endPanel.setLayout(new BoxLayout(endPanel, BoxLayout.PAGE_AXIS));
 		
 		// instantiates end screen components
@@ -174,19 +165,19 @@ public class Window extends JFrame {
 		Game.imageLoader.assetController.newAssetList();
 	}
 
-	public static void updateHealthBar() {
+	public static void updateHealthBar() { // repaints the healthbar
 		healthBar.repaint();
 	}
 
-	public static void updateAmmo() {
+	public static void updateAmmo() { // updates ammo label
 		ammoLbl.setText("Ammo: " + Player.getAmmoCount());
 	}
 
-	public static void updateScore() {
+	public static void updateScore() { // updates score label
 		scoreLbl.setText("Score: " + Player.getScore());
 	}
 
-	public static void updateLevel() {
+	public static void updateLevel() { // updates level label
 		levelLbl.setText("Level: " + ImageLoader.level);
 	}
 

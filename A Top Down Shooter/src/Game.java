@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
-
 /**
  * Game class is the main class for our game! It is the file you need to run for the game to work.
  * 
@@ -21,7 +20,6 @@ public class Game extends Canvas implements Runnable {
 	private AssetController assetController;
 	private Camera camera;
 	public static ImageLoader imageLoader;
-
 	
 	/**
 	 * Default Game constructor. When this is called, a new window is created, the
@@ -103,6 +101,7 @@ public class Game extends Canvas implements Runnable {
 			if (Player.getHealth() == 0) {
 				Player.setHealth(200);
 				new Window(1650, 1000, "Top Down Shooter");
+				stop();
 			}
 		}
 		stop();

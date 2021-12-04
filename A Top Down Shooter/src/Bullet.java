@@ -15,7 +15,6 @@ public class Bullet extends Asset {
 
     private BufferedImage image;
     AssetController assetController;
-    Bullet tempBullet;
 
     /**
 	 * Overloaded Constructor to create a bullet from the player
@@ -76,8 +75,8 @@ public class Bullet extends Asset {
 
 		double boxX = x + dX;
 		double boxY = y;
-		double boxW = 20 + dX / 2;
-		double boxH = 20;
+		double boxW = 5 + dX / 2;
+		double boxH = 5;
 
 		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
 	}
@@ -90,8 +89,8 @@ public class Bullet extends Asset {
 
 		double boxX = x;
 		double boxY = y + dY;
-		double boxW = 20;
-		double boxH = 20 + dY / 2;
+		double boxW = 5;
+		double boxH = 5 + dY / 2;
 
 		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
 
