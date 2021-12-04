@@ -186,7 +186,7 @@ public class Window extends JFrame {
 		ac.asset.clear();
 		close(fr);
 		Player.reset();
-		ImageLoader.level = 0;
+		ImageLoader.level = -1;
 		Game.main(null);
 	}
 
