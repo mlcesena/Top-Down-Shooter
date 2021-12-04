@@ -110,7 +110,7 @@ public class Window extends JFrame {
 	}
 
 	public Window(int width, int height, String title) { // creates game over window
-		Game.imageLoader.assetController.newAssetList();
+		beforeEnd();
 		// fonts used for game over screen
 		Font f = new Font("Courier", Font.BOLD, 75);
 		Font f2 = new Font("Courier", Font.PLAIN, 40);
@@ -164,6 +164,14 @@ public class Window extends JFrame {
 		fr.setVisible(true);
 		
 		close(frame); // closes original game frame
+	}
+
+	private void beforeEnd() {
+		for (int i = 0; i < Game.imageLoader.assetController.asset.size(); i++) {
+			Asset tempAsset = Game.imageLoader.assetController.asset.get(i);
+			Game.imageLoader.assetController.removeAsset(tempAsset);
+		}
+		Game.imageLoader.assetController.newAssetList();
 	}
 
 	public static void updateHealthBar() {
