@@ -1,6 +1,8 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 /**
  * SpeedUp class to create speed boost powerups to increase the player's speed
  * 
@@ -8,6 +10,9 @@ import java.awt.Rectangle;
  */
 
 public class SpeedUp extends Asset{
+
+	private BufferedImage image;
+
     /**
 	 * Overloading constructor to create an object of the Power class
 	 * 
@@ -17,6 +22,11 @@ public class SpeedUp extends Asset{
 	 */
     public SpeedUp(int x, int y, ID id) {
         super(x, y, id);
+		try {
+			image = ImageIO.read(getClass().getResource("/images/SpeedUp.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -29,8 +39,7 @@ public class SpeedUp extends Asset{
 	 * render method to render the powerup into the game
 	 */
     public void render(Graphics g) {
-        g.setColor(Color.GRAY);
-		g.fillOval(x, y, 64, 64);
+        g.drawImage(image, x, y, null);
 	}
 
     /**
