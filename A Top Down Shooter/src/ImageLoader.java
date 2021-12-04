@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 public class ImageLoader {
 	//Changable level to implament stage changes (WIP).
 	public static int enemyCount;
-	public static int level = 0;
+	public static int level = -1;
 	public static int floorCount = 0;
 	AssetController assetController;
 
@@ -61,18 +61,16 @@ public class ImageLoader {
 		//Checks what level to take the map of.
 		newLevel();
 		switch(level) {
-			case 1:
+			case 0:
 				//Title always called first and only at begining of game
 				mapLevel = readImage("/images/Title.png");
 				break;
 			case 999:
 				//End screen used to be called before new pop up was implemented.
-				newLevel();
 				mapLevel = readImage("/images/Game_Over.png");
 				break;
 			default:
 				//Randomly chooses the next level that will be displayed
-				newLevel();
 				Random randGen = new Random();
 				int mapChooser = randGen.nextInt(3) + 1;
 				switch(mapChooser){
@@ -160,6 +158,7 @@ public class ImageLoader {
 		
 		//Adds level and resets wall/floor count for new color
 		level++;
+		Window.updateLevel();
 		Wall.count = 0;
 		Floor.count = 0;
 

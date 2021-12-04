@@ -52,8 +52,7 @@ public class Player extends Asset {
 	 */
 	public void update() {
 		//Check if all enemies are gone if so load the next level.
-		if(ImageLoader.enemyCount <= 0 & ImageLoader.level > 1) {
-			ImageLoader.level = ImageLoader.level + 1;
+		if(ImageLoader.enemyCount <= 0 & ImageLoader.level >= 1) {
 			Game.imageLoader.loadLevel();
 		}
 		
@@ -97,8 +96,8 @@ public class Player extends Asset {
 			dX = 0;
 
 		if (assetController.isSprint()) {
-			dX *= 2;
-			dY *= 2;
+			dX *= 1.5;
+			dY *= 1.5;
 		}
 
 		Collision();

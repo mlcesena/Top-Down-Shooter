@@ -26,7 +26,7 @@ public class Window extends JFrame {
 	// labels used in HUD
 	private static JLabel scoreLbl;
 	private JLabel healthLbl;
-	private JLabel levelLbl;
+	private static JLabel levelLbl;
 	private static JLabel ammoLbl;
 
 	// labels used in game over screen
@@ -177,14 +177,16 @@ public class Window extends JFrame {
 		scoreLbl.setText("Score: " + Player.getScore());
 	}
 
+	public static void updateLevel() {
+		levelLbl.setText("Level: " + ImageLoader.level);
+	}
+
 	public static void resetGame() { // used to reset game variables upon game over and starts new game
 		AssetController ac = new AssetController();
 		ac.asset.clear();
 		close(fr);
 		Player.reset();
 		ImageLoader.level = 0;
-		Game.imageLoader.loadLevel();
-		Game.imageLoader.newLevel();
 		Game.main(null);
 	}
 

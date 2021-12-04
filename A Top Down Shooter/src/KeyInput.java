@@ -53,9 +53,8 @@ public class KeyInput implements KeyListener {
 						Player.reload();
 					break;
 				case KeyEvent.VK_ENTER:
-					if(ImageLoader.level == 1) {
+					if(ImageLoader.level == 0) {
 						ImageLoader.enemyCount = 0;
-						ImageLoader.level = ImageLoader.level + 1;
 						Game.imageLoader.loadLevel();
 					} 
 					break;
