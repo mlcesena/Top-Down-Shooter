@@ -110,6 +110,7 @@ public class Window extends JFrame {
 	}
 
 	public Window(int width, int height, String title) { // creates game over window
+		Game.imageLoader.assetController.newAssetList();
 		// fonts used for game over screen
 		Font f = new Font("Courier", Font.BOLD, 75);
 		Font f2 = new Font("Courier", Font.PLAIN, 40);
