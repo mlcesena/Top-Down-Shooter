@@ -7,7 +7,7 @@ public class Sound {
 
     public Sound (String name) {
         try {
-            String fullPath = System.getProperty("user.dir") + "/src/sounds/" + name;
+            String fullPath = System.getProperty("user.dir") + "/A Top Down Shooter/src/sounds/" + name;
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(fullPath));
             clip = AudioSystem.getClip();
             clip.open(audioStream);
