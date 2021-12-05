@@ -118,7 +118,7 @@ public class Enemy extends Asset {
 					}
 				}
 			}
-			// Enemy to enemy collision (If wanted? Glitchy-ish)
+			// Enemy to enemy collision
 			if (tempAsset.getID() == ID.Enemy && !tempAsset.equals(this)) {
 				if (hitBox().intersects(tempAsset.hitBox())) {
 
@@ -160,6 +160,8 @@ public class Enemy extends Asset {
 						Player.canTakeDmg(false);
 						Player.subtractHealth();
 						Player.setInvincibilityTime(0);
+						Sound playerDamaged = new Sound("PlayerDamaged.wav");
+						playerDamaged.start();
 					}
 				}
 			}

@@ -119,6 +119,8 @@ public class Bullet extends Asset {
                     assetController.removeAsset(this);
                     assetController.removeAsset(tempAsset);
                     Player.increaseScore();
+                    Sound enemyDamaged = new Sound("ZombieDeath.wav");
+                    enemyDamaged.start();
                 }
             }
         }       

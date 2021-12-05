@@ -73,6 +73,11 @@ public class ImageLoader {
 				//Randomly chooses the next level that will be displayed
 				Random randGen = new Random();
 				int mapChooser = randGen.nextInt(9) + 1;
+
+				// Winning sound
+				Sound roundWin = new Sound("RoundWin.wav");
+				roundWin.start();
+
 				switch(mapChooser){
 					case 1: mapLevel = readImage("/images/level1_1.png"); break;
 					case 2: mapLevel = readImage("/images/level2_1.png"); break;
@@ -156,6 +161,7 @@ public class ImageLoader {
 	 * Resets variables and removes all current assets.
 	 */
 	public void newLevel() {
+
 		//Removes assets to free computer space
 		for (int i = 0; i < assetController.asset.size(); i++) {
 			Asset tempAsset = assetController.asset.get(i);

@@ -21,8 +21,6 @@ public class HUD extends Asset {
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
@@ -33,7 +31,6 @@ public class HUD extends Asset {
 
     @Override
     public Rectangle hitBox() {
-        // TODO Auto-generated method stub
         return null;
     }
 }

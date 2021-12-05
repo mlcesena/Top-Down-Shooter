@@ -38,7 +38,9 @@ public class Window extends JFrame {
 	// HUD components and variables
 	private static JComponent healthBar;
 	private static JPanel hud;
-	
+
+	// Background Music
+	private static Sound backgroundMusic = new Sound("BackgroundMusic.wav");
 
 	/**
 	 * This overloading constructor should always be called when creating a window
@@ -53,6 +55,10 @@ public class Window extends JFrame {
 	 * @param game   - The game is passed into the window to begin displaying it
 	 */
 	public Window(int width, int height, String title, Game game) { // creates game window
+
+		// Starts background music
+		backgroundMusic.loop();
+
 		Font f = new Font("Courier", Font.BOLD, 30); // creates new font for HUD items
 		JPanel healthPanel = new JPanel(new GridLayout(1, 2)); // creates new JPanel with GridLayout to hold health items
 		hud = new JPanel(new GridLayout(1, 4)); // instantiates hud JPanel with a GridLayout of 1x4
@@ -109,6 +115,12 @@ public class Window extends JFrame {
 
 	public Window(int width, int height, String title) { // creates game over window
 		beforeEnd();
+
+		// Game over sound
+		backgroundMusic.reset();
+		Sound roundLose = new Sound("RoundLose.wav");
+		roundLose.start();
+
 		// fonts used for game over screen
 		Font f = new Font("Courier", Font.BOLD, 75);
 		Font f2 = new Font("Courier", Font.PLAIN, 40);
@@ -188,6 +200,7 @@ public class Window extends JFrame {
 		Player.reset();
 		ImageLoader.level = -1;
 		Game.main(null);
+		backgroundMusic.loop();
 	}
 
 	public static void requestReload() { // If player tries to shoot with 0 bullets, replaces ammo counter with a reload notification

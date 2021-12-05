@@ -146,6 +146,8 @@ public class Player extends Asset {
 
 					assetController.setSprint(true);
 					assetController.removeAsset(tempAsset);
+					Sound speedUp = new Sound("SpeedUp.wav");
+					speedUp.start();
 					
 					Timer t = new java.util.Timer();
 					t.schedule(new java.util.TimerTask() {
@@ -163,6 +165,8 @@ public class Player extends Asset {
 					if (playerHealth <= 160) {
 						addHealth(40);
 						assetController.removeAsset(tempAsset);
+						Sound medKit = new Sound("MedKit.wav");
+						medKit.start();
 					}
 				}
 			}

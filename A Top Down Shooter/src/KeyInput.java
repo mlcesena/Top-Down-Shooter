@@ -48,8 +48,11 @@ public class KeyInput implements KeyListener {
 				case KeyEvent.VK_SHIFT:
 					break;
 				case KeyEvent.VK_R:
-					if (Player.getAmmoCount() < 10)
+					if (Player.getAmmoCount() < 10) {
 						Player.reload();
+						Sound reload = new Sound("Reload.wav");
+						reload.start();
+					}
 					break;
 				case KeyEvent.VK_ENTER:
 					if(ImageLoader.level == 0) {
@@ -65,7 +68,9 @@ public class KeyInput implements KeyListener {
 					else {
 						// Create a bullet object at the players position and reduce ammo by 1
 						assetController.addAsset(new Bullet(assetController.asset.get(i).getX(),assetController.asset.get(i).getY(), ID.Bullet, assetController));
-						Player.setAmmo();	
+						Player.setAmmo();
+						Sound gunshot = new Sound("Gunshot.wav");
+						gunshot.start();
 					}
 					break;
 
