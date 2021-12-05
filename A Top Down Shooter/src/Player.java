@@ -6,14 +6,14 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 /**
- * Player class is the class created to add the player into the game. The pixel
- * with the corresponding player color will be turned into a 32x48 movable
+ * Player class is the class created to add the player into the game.
+ * The pixel the corresponding player color will be turned into a 32x48 movable
  * character.
  * 
  * @author Tyler Battershell / Michael Cesena / Ethan Hubbell
  */
 public class Player extends Asset {
-	//Initializing player character and updater
+
 	private BufferedImage image;
 	private static int invincibilityTime = 0;
 	private static boolean canTakeDmg = true;
@@ -21,11 +21,11 @@ public class Player extends Asset {
 	private static int playerAmmo = 20;
 	private static int playerHealth = 200;
 	private static int dir = 1;
-
 	AssetController assetController;
 
 	/**
-	 * Overloading constructor to create an object of the Player class
+	 * Overloading constructor to create an object of the Player class.
+	 * Sets an original PNG to be drawn upon loading.
 	 * 
 	 * @param x               - x position of the wall
 	 * @param y               - y position of the wall
@@ -36,26 +36,27 @@ public class Player extends Asset {
 	public Player(int x, int y, ID id, AssetController assetController) {
 		super(x, y, id);
 		this.assetController = assetController;
-
-		//Loads original sprite to be updated on movement.
 		try {
 			image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Player.java - Failed to set Player PNG");
 		}
-		
 	}
 
 	/**
-	 * update method to update the player's position. Changes based on
-	 * assetController's booleans, which are updated in the KeyInput class.
+	 * update() method to update the enemy x and y positions.
+	 * Based on assetController's booleans, which are updated in the KeyInput class.
+	 * PNG is updated based on the direction the enemy is moving.
+	 * Loads a new level if there are no more enemies.
+	 * Calls the Collision() method to allow collision.
+	 * Uses a boolean and an integer value to allow 1 second of invincibility after
+	 * being attacked.
 	 */
 	public void update() {
-		//Check if all enemies are gone if so load the next level.
 		if(ImageLoader.enemyCount <= 0 & ImageLoader.level >= 1) {
 			Game.imageLoader.loadLevel();
 		}
-		
+
 		x += dX;
 		y += dY;
 
@@ -72,27 +73,23 @@ public class Player extends Asset {
 		if (assetController.isLeft()) {
 			dX = -5;
 			dir = -1;
-			//Changes sprite orientation for directional movement
 			try {
 				image = ImageIO.read(getClass().getResource("/images/Player_Sprite_Left.png"));
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Player.java - Failed to update Player PNG");
 			}
-		}
-		else if (!assetController.isRight())
+		} else if (!assetController.isRight())
 			dX = 0;
 
 		if (assetController.isRight()) {
 			dX = 5;
 			dir = 1;
-			//Changes sprite orientation for directional movement
 			try {
 				image = ImageIO.read(getClass().getResource("/images/Player_Sprite.png"));
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Player.java - Failed to update Player PNG");
 			}
-		}
-		else if (!assetController.isLeft())
+		} else if (!assetController.isLeft())
 			dX = 0;
 
 		if (assetController.isSprint()) {
@@ -102,21 +99,22 @@ public class Player extends Asset {
 
 		Collision();
 		invincibilityTime++;
-		if(getInvincibilityTime() >= 60) {
+		if (getInvincibilityTime() >= 60) {
 			canTakeDmg(true);
 		}
 	}
 
 	/**
-	 * Collision system in the game. If an object's hitBox touches a Wall's hitBox,
-	 * it will not allow it to move any further in that direction
+	 * Collision() method for enemy collision.
+	 * Does not allow the player to walk through walls.
+	 * Increases player speed for 3 seconds when the player touches a speed up
+	 * powerup. Also plays a SpeedUp sound.
+	 * Adds 40 health when the player touches a MedKit. Also plays a MedKit sound.
 	 */
 	private void Collision() {
 
 		for (int i = 0; i < assetController.asset.size(); i++) {
 			Asset tempAsset = assetController.asset.get(i);
-
-			//If colliding with wall reset payer to before wall (prevents travel through walls)
 			if (tempAsset.getID() == ID.Wall) {
 				if (hitBox().intersects(tempAsset.hitBox())) {
 
@@ -140,7 +138,6 @@ public class Player extends Asset {
 					}
 
 				}
-			//Collision with speed powerup
 			} else if (tempAsset.getID() == ID.SpeedUp) {
 				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
 
@@ -148,7 +145,7 @@ public class Player extends Asset {
 					assetController.removeAsset(tempAsset);
 					Sound speedUp = new Sound("SpeedUp.wav");
 					speedUp.start();
-					
+
 					Timer t = new java.util.Timer();
 					t.schedule(new java.util.TimerTask() {
 						public void run() {
@@ -158,9 +155,7 @@ public class Player extends Asset {
 					}, 3000);
 
 				}
-			}
-			// Collision with Med Kit
-			else if (tempAsset.getID() == ID.MedKit) {
+			} else if (tempAsset.getID() == ID.MedKit) {
 				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
 					if (playerHealth <= 160) {
 						addHealth(40);
@@ -170,20 +165,19 @@ public class Player extends Asset {
 					}
 				}
 			}
-			//Areas for other collisions
 		}
 	}
 
 	/**
-	 * render method to render the player into the game and update its directional movement.
+	 * render() method to render the player into the game.
 	 */
 	public void render(Graphics g) {
 		g.drawImage(image, x, y, null);
 	}
 
 	/**
-	 * hitBox method to return a rectangle with the player's hit box, used for
-	 * horizontal collision
+	 * hitBox() method to return a rectangle with the enemy's hit box, used for
+	 * horizontal collision.
 	 */
 	public Rectangle hitBox() {
 
@@ -196,8 +190,8 @@ public class Player extends Asset {
 	}
 
 	/**
-	 * hitBox method to return a rectangle with the player's hit box, used for
-	 * vertical collision
+	 * hitBox2() method to return a rectangle with the enemy's hit box, used for
+	 * vertical collision.
 	 */
 	public Rectangle hitBox2() {
 
@@ -209,72 +203,81 @@ public class Player extends Asset {
 		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
 	}
 
-	public static int getScore() { // returns player score
+	/**
+	 * getScore(), increaseScore(), getAmmoCount(), setAmmo(), reload(),
+	 * getHealth(), setHealth(), addHealth(), subtractHealth(),
+	 * getInvincibilityTime(), setInvincibilityTime(), canTakeDmg(), canTakeDmg(),
+	 * and getDirection() methods are used to access player variables.
+	 */
+	public static int getScore() { // Returns player score
 		return playerScore;
 	}
 
-	public static void increaseScore() { // increases player score
+	public static void increaseScore() { // Increases/Updates player score
 		playerScore++;
 		Window.updateScore();
 	}
 
-	public static int getAmmoCount() { // returns ammo count
+	public static int getAmmoCount() { // Returns ammo count
 		return playerAmmo;
 	}
 
-	public static void setAmmo() { // subtracts from ammo count
+	public static void setAmmo() { // Subtracts/Updates ammo count
 		playerAmmo--;
 		Window.updateAmmo();
 	}
 
-	public static void reload() { // resets ammo count
+	public static void reload() { // Resets ammo count
 		playerAmmo = 10;
 		Window.updateAmmo();
 	}
 
-	public static int getHealth() { // returns player health
+	public static int getHealth() { // Returns player health
 		return playerHealth;
 	}
 
-	public static void setHealth(int health) { // sets player health to parameter value
+	public static void setHealth(int health) { // Sets/Updates player health to parameter value
 		playerHealth = health;
 		Window.updateHealthBar();
 	}
 
-	public static void addHealth(int health) { // adds player health to parameter value
+	public static void addHealth(int health) { // Adds/Updates player health to parameter value
 		playerHealth += health;
 		Window.updateHealthBar();
 	}
 
-	public static void subtractHealth() { // subtracts player health
+	public static void subtractHealth() { // Subtracts/Updates player health
 		playerHealth -= 40;
 		Window.updateHealthBar();
 	}
 
-	public static void reset() { // resets player variables
+	public static int getInvincibilityTime() { // Returns invincibility time
+		return invincibilityTime;
+	}
+
+	public static void setInvincibilityTime(int time) { // Sets invincibility time to parameter value
+		invincibilityTime = time;
+	}
+
+	public static boolean canTakeDmg() { // Returns true/false if player can/cannot take damage
+		return canTakeDmg;
+	}
+
+	public static void canTakeDmg(boolean state) { // Sets canTakeDmg to parameter value
+		canTakeDmg = state;
+	}
+
+	public static int getDirection() { // Returns player direction
+		return dir;
+	}
+
+	/**
+	 * reset() method resets the player variables
+	 */
+	public static void reset() {
 		playerHealth = 200;
 		playerAmmo = 10;
 		playerScore = 0;
 		dir = 1;
 	}
-
-	public static int getInvincibilityTime() {
-		return invincibilityTime;
-	}
-
-	public static void setInvincibilityTime(int time) {
-		invincibilityTime = time;
-	}
-
-	public static boolean canTakeDmg() {
-		return canTakeDmg;
-	}
-	public static void canTakeDmg(boolean state) {
-		canTakeDmg = state;
-	}
-
-	public static int getDirection() {
-		return dir;
-	}
-
 }

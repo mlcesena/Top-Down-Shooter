@@ -2,9 +2,9 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 /**
- * The class Asset is a superclass that is used by every entity in the game. It
+ * Asset class is a superclass that is used by every entity in the game. It
  * contains methods for getting and setting position values (x & y), movement
- * values (dX & dY), and the ID field
+ * values (dX & dY), and ID field.
  * 
  * @author Tyler Battershell
  */
@@ -16,11 +16,11 @@ public abstract class Asset {
 
 	/**
 	 * Overloading constructor used every time an asset is created through any of
-	 * its subclass method calls
+	 * its subclass method calls.
 	 * 
-	 * @param x  - The x location of the asset
-	 * @param y  - The y location of the asset
-	 * @param id - They ID of the asset. Determines how it interacts with others
+	 * @param x  - The x location of the asset.
+	 * @param y  - The y location of the asset.
+	 * @param id - The ID of the asset. Determines how it interacts with others.
 	 */
 	public Asset(int x, int y, ID id) {
 		this.x = x;
@@ -39,7 +39,8 @@ public abstract class Asset {
 	public abstract Rectangle hitBox();
 
 	/**
-	 * These are all getters and setters for all the variables in the Asset class.
+	 * getX(), setX(), getY(), setY(), getdX(), setdX(), getdY(), setdY(), getID(),
+	 * and setID() are getters and setters for the asset's movement variables.
 	 */
 	public int getX() {
 		return x;

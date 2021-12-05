@@ -2,9 +2,9 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**
- * The AssetController class is one of the most important classes in the
+ * AssetController class is one of the most important classes in the
  * program. It is used throughout the code to manage the assets in the game,
- * allowing them to update and render correctly. It also contains methods used
+ * allowing them to update and render correctly. It contains methods used
  * for adding and removing assets.
  * 
  * @author Tyler Battershell
@@ -15,8 +15,8 @@ public class AssetController {
 	private boolean up = false, down = false, left = false, right = false, sprint = false;
 
 	/**
-	 * update is a method that cycles through every asset in the game and updates
-	 * it.
+	 * update() method cycles through every asset in the game and updates it based
+	 * on that objects' update() method.
 	 */
 	public void update() {
 		for (int i = 0; i < asset.size(); i++)
@@ -24,8 +24,8 @@ public class AssetController {
 	}
 
 	/**
-	 * render is a method that cycles through every asset in the game and renders
-	 * it.
+	 * render() method cycles through every asset in the game and renders it based
+	 * on that objects' reder() method.
 	 */
 	public void render(Graphics g) {
 		for (int i = 0; i < asset.size(); i++)
@@ -33,34 +33,36 @@ public class AssetController {
 	}
 
 	/**
-	 * addAsset is a method that should be called to add an asset to the game.
+	 * addAsset() method should be called to add an asset to the game.
 	 * 
-	 * @param tempAsset - The asset to be
+	 * @param tempAsset - The asset to be added.
 	 */
 	public void addAsset(Asset tempAsset) {
 		asset.add(tempAsset);
 	}
 
 	/**
-	 * removeAsset is a method that should be called to get rid of an asset that is
+	 * removeAsset() method should be called to get rid of an asset that is
 	 * in the game.
 	 * 
-	 * @param tempAsset - The asset to be removed
+	 * @param tempAsset - The asset to be removed.
 	 */
 	public void removeAsset(Asset tempAsset) {
 		asset.remove(tempAsset);
 	}
 
 	/**
-	 * newAssetList is a method that should be called to get rid of all assets that are
-	 * in the game.
+	 * newAssetList() method deletes all current assets in the list and creates a
+	 * new list of assets.
 	 */
 	public void newAssetList() {
 		asset = new ArrayList<Asset>();
 	}
 
 	/**
-	 * These are all getters and setters for movement controls
+	 * isUp(), setUp(), isDown(), setDown() isLeft(), setLeft(), isRight(),
+	 * setRight(), isSprint(), and setSprint() are all getters and setters for
+	 * movement controls
 	 */
 	public boolean isUp() {
 		return up;
@@ -102,8 +104,16 @@ public class AssetController {
 		this.sprint = sprint;
 	}
 
+	/**
+	 * setAllFalse() method sets all the movement controls to false to prevent
+	 * movement from carrying over between runs/levels.
+	 */
 	public void setAllFalse() {
-		up = false; down = false; left = false; right = false; sprint = false;
+		up = false;
+		down = false;
+		left = false;
+		right = false;
+		sprint = false;
 	}
 
 }

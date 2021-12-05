@@ -6,22 +6,22 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 /**
- * Floor class is the class created to add floors into the game. Each pixel with
- * the corresponding Floor color will be turned into a 32x32 "floor"
+ * Floor class is used to add floors into the game. Each pixel with
+ * the corresponding Floor color will be turned into a 32x32 "floor."
  * 
  * @author Ethan Hubbell
  */
 public class Floor extends Asset {
-	//Initializing wall and updater
+	
 	private static BufferedImage image;
 	public static int count = 0;
     public static int countF = 0;
 	public static int xFloor = 0;
 	public static int yFloor = 0;	
 	
-
 	/**
-	 * Overloading constructor to create an object of the Floor class
+	 * Overloading constructor to create an object of the Floor class.
+	 * The PNG is randomly chosen between two variants.
 	 * 
 	 * @param x  - x position of the floor
 	 * @param y  - y position of the floor
@@ -41,12 +41,9 @@ public class Floor extends Asset {
 					case 1:
 						image = ImageIO.read(getClass().getResource("/images/Floor_Tile_Tinted.png"));
 						break;
-                    default:
-                        image = ImageIO.read(getClass().getResource("/images/Floor_Tile_Tinted.png"));
-                        break;
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Floor.java - Failed to set Floor PNG");
 			}
 			count = 1;
 		}
@@ -54,24 +51,25 @@ public class Floor extends Asset {
 	}
 
 	/**
-	 * update method to update the floors. There is no movement so there is no code.
+	 * update() method to update the floors.
+	 * There is no movement so there is no code.
 	 */
 	public void update() {
 		
 	}
 	
 	/**
-	 * render method to render the floors into the game.
+	 * render() method to render the floor into the game.
 	 */
 	public void render(Graphics g) {
-            g.drawImage(image, x, y, null);
+        g.drawImage(image, x, y, null);
 	}
 	
 	/**
-	 * hitBox method to return a rectangle with the Floor's hit box (Same size as the wall)
+	 * hitBox() method to return null. Floor does not have a hitBox.
 	 */
 	public Rectangle hitBox() {
-		return new Rectangle(x, y, 32, 32);
+		return null;
 	}
 
 }

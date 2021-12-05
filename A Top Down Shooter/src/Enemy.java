@@ -5,89 +5,91 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 /**
- * The Enemy class is used to create new enemy objects and control their movement, collision, and other mechanics
+ * Enemy class is used to create new enemy objects.
+ * This class controls their movement and collision.
  * 
  * @authors Tyler Battershell, Michael Cesena, Ethan Hubbell
  */
 public class Enemy extends Asset {
-    
-    AssetController assetController;
-    private int diffX, diffY;
-    private double distance;
+
+	AssetController assetController;
+	private int diffX, diffY;
+	private double distance;
 	private BufferedImage image;
 
 	/**
-	 * Overloading constructor to create an object of the Player class
+	 * Overloading constructor to create an object of the Enemy class.
+	 * Sets an original PNG to be drawn upon loading.
 	 * 
-	 * @param x               - x position of the wall
-	 * @param y               - y position of the wall
-	 * @param id              - ID value of the wall (ID.Wall)
-	 * @param assetController - adds the assetController to the player to control
-	 *                        movement
+	 * @param x               - x position of the enemy
+	 * @param y               - y position of the enemy
+	 * @param id              - ID value of the enemy (ID.Enemy)
+	 * @param assetController - assetController to allow the enemy to be updated
+	 *                        and rendered
 	 */
-    public Enemy(int x, int y, ID id, AssetController assetController) {
-        super(x, y, id); // calls Asset super constructor
-        this.assetController = assetController; // sets assetController
-
-		// attempts to set image of enemy object
+	public Enemy(int x, int y, ID id, AssetController assetController) {
+		super(x, y, id);
+		this.assetController = assetController;
 		try {
 			image = ImageIO.read(getClass().getResource("/images/Enemy_Sprite.png"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Enemy.java - Failed to set Enemy PNG");
 		}
-		
-    }
 
-    public void update() {
-		for(int i = 0; i < assetController.asset.size(); i++) {
-			if(assetController.asset.get(i).getID() == ID.Player) {
-				diffX = x - assetController.asset.get(i).getX(); // calculates the difference between the enemy's x and the player's x
-                diffY = y - assetController.asset.get(i).getY(); // calculates the difference between the enemy's y and the player's y
-                distance = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2)); // calculates total distance between enemy and player
+	}
+
+	/**
+	 * update() method to update the enemy x and y positions.
+	 * Calculates the difference in x and y values between this enemy and the
+	 * player. Calculates the total difference between the two.
+	 * Enemy only moves when they are within 640 pixels of the player.
+	 * PNG is updated based on the direction the enemy is moving.
+	 * Calls the Collision() method to allow collision.
+	 */
+	public void update() {
+		for (int i = 0; i < assetController.asset.size(); i++) {
+			if (assetController.asset.get(i).getID() == ID.Player) {
+				diffX = x - assetController.asset.get(i).getX();
+				diffY = y - assetController.asset.get(i).getY();
+				distance = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
 			}
-        }
-        // Enemy only moves within 640 pixels of the player
-		// Sets directional movement
-        if (distance <= 640 && distance != 0) {
-			if (diffX <= 0) {
-				dX = 1; // sets x velocity to move right
-				// attempts to change enemy image to face right
-				try {
+		}
+		if (distance <= 640 && distance != 0) {
+			try {
+				if (diffX <= 0) {
+					dX = 1;
 					image = ImageIO.read(getClass().getResource("/images/Enemy_Sprite.png"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-            }
-            else if (diffX >= 0){
-				dX = -1; // sets x velocity to move left
-				// attempts to change enemy image to face left
-				try {
+				} else if (diffX >= 0) {
+					dX = -1;
 					image = ImageIO.read(getClass().getResource("/images/Enemy_Sprite_Left.png"));
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
-            }
-			
-            if (diffY <= 0) {
-				dY = 1; // sets y velocity to move downwards
-            }
-            else if (diffY >= 0){
-				dY = -1; // sets y velocity to move backwards
-            }
-        } else {
-			dX = 0; // sets x veloctiy to 0
-            dY = 0;	// sets y veloctiy to 0
-        }
+			} catch (IOException e) {
+				System.out.println("Enemy.java - Failed to set Enemy PNG");
+			}
 
-		x += dX; // applies x velocity to positional x
-		y += dY; // applies y velocity to positional y
-		
-        Collision(); // calls method to check for collision
-    }
+			if (diffY <= 0) {
+				dY = 1;
+			} else if (diffY >= 0) {
+				dY = -1;
+			}
+		} else {
+			dX = 0;
+			dY = 0;
+		}
 
-    /**
-	 * Collision system in the game. If an object's hitBox touches a Wall's hitBox,
-	 * it will not allow it to move any further in that direction
+		x += dX;
+		y += dY;
+
+		Collision();
+	}
+
+	/**
+	 * Collision() method for enemy collision.
+	 * Does not allow the enemy to walk through walls.
+	 * Does not allow the enemy to walk through other enemies.
+	 * Hurts the player if an enemy contacts a player and the player does not have
+	 * the invincibility timer active.
+	 * Plays a playerDamaged sound effect when the player is touched.
 	 */
 	private void Collision() {
 		for (int i = 0; i < assetController.asset.size(); i++) {
@@ -118,7 +120,6 @@ public class Enemy extends Asset {
 					}
 				}
 			}
-			// Enemy to enemy collision
 			if (tempAsset.getID() == ID.Enemy && !tempAsset.equals(this)) {
 				if (hitBox().intersects(tempAsset.hitBox())) {
 
@@ -143,20 +144,22 @@ public class Enemy extends Asset {
 				}
 			}
 			if (tempAsset.getID() == ID.Player) {
-				// if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
-				// 		Window.subtractPlayerHealth();
-				// 		// Potential Knockback mechanic?? (Could be tough, allows enemies to "hit" the player through walls)
-				// 		if (diffX < 0)
-				// 			tempAsset.dX = 10;
-				// 		else if (diffX > 0)
-				// 			tempAsset.dX = -10;
-				// 		if (diffY < 0)
-				// 			tempAsset.dY = 10;
-				// 		else if (diffY > 0)
-				// 			tempAsset.dY = -10;
+				// if (hitBox().intersects(tempAsset.hitBox()) ||
+				// hitBox2().intersects(tempAsset.hitBox())) {
+				// Window.subtractPlayerHealth();
+				// // Potential Knockback mechanic?? (Could be tough, allows enemies to "hit"
+				// the player through walls)
+				// if (diffX < 0)
+				// tempAsset.dX = 10;
+				// else if (diffX > 0)
+				// tempAsset.dX = -10;
+				// if (diffY < 0)
+				// tempAsset.dY = 10;
+				// else if (diffY > 0)
+				// tempAsset.dY = -10;
 				// }
 				if (hitBox().intersects(tempAsset.hitBox()) || hitBox2().intersects(tempAsset.hitBox())) {
-					if(Player.canTakeDmg()) {
+					if (Player.canTakeDmg()) {
 						Player.canTakeDmg(false);
 						Player.subtractHealth();
 						Player.setInvincibilityTime(0);
@@ -166,28 +169,31 @@ public class Enemy extends Asset {
 				}
 			}
 		}
-    }
+	}
 
-    public void render(Graphics g) {
+	/**
+     * render() method to render the enemy into the game.
+     */
+	public void render(Graphics g) {
 		g.drawImage(image, x, y, null);
-    }
+	}
 
-    /**
-	 * hitBox method to return a rectangle with the enemy's hit box, used for
-	 * horizontal collision
+	/**
+	 * hitBox() method to return a rectangle with the enemy's hit box, used for
+	 * horizontal collision.
 	 */
-    public Rectangle hitBox() {
-        double boxX = x + dX;
+	public Rectangle hitBox() {
+		double boxX = x + dX;
 		double boxY = y;
 		double boxW = 32 + dX / 2;
 		double boxH = 48;
 
 		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
-    }
+	}
 
-    /**
-	 * hitBox method to return a rectangle with the enemy's hit box, used for
-	 * vertical collision
+	/**
+	 * hitBox2() method to return a rectangle with the enemy's hit box, used for
+	 * vertical collision.
 	 */
 	public Rectangle hitBox2() {
 
@@ -199,4 +205,3 @@ public class Enemy extends Asset {
 		return new Rectangle((int) boxX, (int) boxY, (int) boxW, (int) boxH);
 	}
 }
-
