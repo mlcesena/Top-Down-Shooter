@@ -1,5 +1,7 @@
 import java.io.File;
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  * Sound class enables us to create music and sound effects for our game through Java's imported libraries.
