@@ -108,8 +108,6 @@ public class ImageLoader {
 
 		int h = mapLevel.getHeight();
 		int w = mapLevel.getWidth();
-		int playerPixelX = 0;
-		int playerPixelY = 0;
 		int wallPixel = getRGB(0, 0, mapColorKey);
 		int playerPixel = getRGB(1, 0, mapColorKey);
 		int enemyPixel = getRGB(2, 0, mapColorKey);
@@ -136,15 +134,13 @@ public class ImageLoader {
 						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
 						assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
 						enemyCount++;
-					} else if (pixel == playerPixel & i == 0) {
+					} else if (pixel == playerPixel & i == 5) {
 						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
-						playerPixelX = imageX;
-						playerPixelY = imageY;
+						assetController.addAsset(new Player(imageX * 32, imageY * 32, ID.Player, assetController));
 					}
 				}
 			}
 		}
-		assetController.addAsset(new Player(playerPixelX * 32, playerPixelY * 32, ID.Player, assetController));
 	}
 
 	/**
