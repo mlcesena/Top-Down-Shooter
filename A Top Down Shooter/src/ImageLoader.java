@@ -130,7 +130,7 @@ public class ImageLoader {
 					} else if (pixel == medKitPixel & i == 3) {
 						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
 						assetController.addAsset(new MedKit(imageX * 32, imageY * 32, ID.MedKit));
-					} else if (pixel == enemyPixel & (i == 3 | i == 4)) {
+					} if (pixel == enemyPixel & (i == 3 | i == 4)) {
 						if(i == 3)
 							assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
 						else if(i == 4) {
