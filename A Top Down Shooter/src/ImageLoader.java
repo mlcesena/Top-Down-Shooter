@@ -124,12 +124,16 @@ public class ImageLoader {
 						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
 					else if (pixel == wallPixel & i == 1)
 						assetController.addAsset(new Wall(imageX * 32, imageY * 32, ID.Wall, level));
-					else if (pixel == speedPixel & i == 2) {
-						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
-						assetController.addAsset(new SpeedUp(imageX * 32, imageY * 32, ID.SpeedUp));
-					} else if (pixel == medKitPixel & i == 3) {
-						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
-						assetController.addAsset(new MedKit(imageX * 32, imageY * 32, ID.MedKit));
+					else if (pixel == speedPixel & i == 2 | i == 0) {
+						if(i == 0)
+							assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
+						else if(i == 0)
+							assetController.addAsset(new SpeedUp(imageX * 32, imageY * 32, ID.SpeedUp));
+					} else if (pixel == medKitPixel & i == 3 | i == 0) {
+						if(i == 0)
+							assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
+						else if(i == 3)
+							assetController.addAsset(new MedKit(imageX * 32, imageY * 32, ID.MedKit));
 					} if (pixel == enemyPixel & (i == 0 | i == 4)) {
 						if(i == 0)
 							assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
@@ -137,9 +141,11 @@ public class ImageLoader {
 							assetController.addAsset(new Enemy(imageX * 32, imageY * 32, ID.Enemy, assetController));
 							enemyCount++;
 						}
-					} else if (pixel == playerPixel & i == 5) {
-						assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
-						assetController.addAsset(new Player(imageX * 32, imageY * 32, ID.Player, assetController));
+					} else if (pixel == playerPixel & i == 5 | i == 0) {
+						if(i == 0)
+							assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
+						else if(i == 5)
+							assetController.addAsset(new Player(imageX * 32, imageY * 32, ID.Player, assetController));
 					}
 				}
 			}
