@@ -127,7 +127,7 @@ public class ImageLoader {
 					else if (pixel == speedPixel & i == 2 | i == 0) {
 						if(i == 0)
 							assetController.addAsset(new Floor(imageX * 32, imageY * 32, ID.Floor));
-						else if(i == 0)
+						else if(i == 2)
 							assetController.addAsset(new SpeedUp(imageX * 32, imageY * 32, ID.SpeedUp));
 					} else if (pixel == medKitPixel & i == 3 | i == 0) {
 						if(i == 0)
